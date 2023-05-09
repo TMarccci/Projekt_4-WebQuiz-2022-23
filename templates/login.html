@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <h3 class="text-center my-5 py-3">Bejelentkezés</h3>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="col-12 col-md-3 mx-auto text-center alert alert-danger">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <form class="col-12 col-md-3 mx-auto needs-validation" method="POST" action="/login" novalidate>
+        <div class="row">
+            <div class="col-12 my-2">
+                <label for="validationDefault03" class="form-label">Email</label>
+                <input type="email" class="form-control" id="validationDefaultEmail" name="email" required>
+            </div>
+            <div class="col-12 my-2">
+                <label for="validationDefaultPassword" class="form-label">Jelszó</label>
+                <div class="input-group d-flex">
+                  <input type="password" class="form-control" aria-label="password" aria-describedby="password" id="validationDefaultPassword" name="password" required/>
+                </div>
+            </div>
+            
+            </div>
+            <div class="col-12 my-2">
+                <button class="btn btn-primary" id="submitbutton">Belépek</button>
+            </div>
+        </div>
+      </form>
+</div>
+
+<script src="{{ url_for('static', filename='js/log/submit.js') }}"></script>
+{% endblock %}
+</body>
+</html>

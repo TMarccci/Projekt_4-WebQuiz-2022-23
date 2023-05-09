@@ -1,29 +1,28 @@
-from flask import Flask, session, redirect, request, url_for, render_template, Response, jsonify
-import mysql.connector.pooling
-
-# Flask Settings
-hostIp = '127.0.0.1'
-hostPort = 5004
-# Database Settings
-dbHost = 'vpn.tmarccci.hu'
-dbUser = 'qpbackend'
-dbPass = 'quiz123@'
-dbName = 'quizpro'
-
-app = Flask(__name__)
+from flask import session, redirect, request, url_for, render_template, Response, jsonify, flash
+from app import app, cnxpool
 
 @app.route('/')
 def index():
-    return render_template('home.html', title='QuizPro - Home')
+    # If the session contains the loggedin variable, we can assume the user is logged in.
+    if 'loggedin' in session:
+        userid = session['id']
 
-@app.route('/learn/<materialid>')
-def learn(materialid):
-    return render_template('learn.html', title='QuizPro - Material Name')
+        # Get the user's gender and username
+        cnx = cnxpool.get_connection()
+        cursor = cnx.cursor()
+        cursor.execute("SELECT * FROM users WHERE userid = %s", (userid,))
+        user = cursor.fetchone()
+        cursor.close()
+        cnx.close()
 
-@app.route('createmarterial/<materialid>')
-def creatematerial(materialid):
-    return render_template('creatematerial.html', title='QuizPro - Create Material')
+        username = user[3]
+        gender = user[8]
 
-if __name__ == '__main__':
-    app.run(host=hostIp, port=hostPort, debug=False)
-    print("\n")
+        if gender == 0:
+            gender = "M"
+        else:
+            gender = "W"
+
+        return render_template('home.html', title='QuizPro - Főoldal', logged_in=True, name=username, gender=gender)
+    else:
+        return render_template('home.html', title='QuizPro - Főoldal', logged_in=False)

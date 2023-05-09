@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <h3 class="text-center my-5 py-3">Regisztráció</h3>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="col-12 col-md-3 mx-auto text-center alert alert-danger">
+                {{ messages[0] }} <a href="{{ url_for('login') }}">Bejelentkezés</a>
+            </div>
+        {% endif %}
+    {% endwith %}
+    <form class="col-12 col-md-3 mx-auto needs-validation" method="POST" action="/register" novalidate>
+        <div class="row">
+            <div class="col-12 my-2">
+              <label for="validationDefaultUsername" class="form-label">Felhasználónév</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" name="username" required>
+              </div>
+            </div>
+            <div class="col-12 my-2">
+                <label for="validationDefaultPassword" class="form-label">Jelszó</label>
+                <div class="input-group d-flex">
+                  <input type="password" class="form-control" aria-label="password" aria-describedby="password" id="validationDefaultPassword" name="password" required/>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="alert py-3 mb-0 d-none" role="alert" id="password-alert">
+                    <ul class="list-unstyled mb-0">
+                    <li class="requirements leng">
+                        <i class="fas fa-check text-success me-2"></i>
+                        <i class="fas fa-times text-danger me-3"></i>
+                        Minimum 8 karakter</li>
+                    <li class="requirements big-letter">
+                        <i class="fas fa-check text-success me-2"></i>
+                        <i class="fas fa-times text-danger me-3"></i>
+                        Minimum 1 nagy betű</li>
+                    <li class="requirements num">
+                        <i class="fas fa-check text-success me-2"></i>
+                        <i class="fas fa-times text-danger me-3"></i>
+                        Minimum 1 szám</li>
+                    <li class="requirements special-char">
+                        <i class="fas fa-check text-success me-2"></i>
+                        <i class="fas fa-times text-danger me-3"></i>
+                        Minimum 1 speciális karakter</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12 my-2">
+                <label for="validationDefault03" class="form-label">Email</label>
+                <input type="email" class="form-control" id="validationDefaultEmail" name="email" required>
+            </div>
+            <div class="col-12 my-2">
+                <label for="validationDefaultSex" class="form-label">Neme</label>
+                <div class="row ps-4">
+                    <div class="col-6">
+                        <input type="radio" class="form-check-input" id="validationDefaultSex" name="gender" value="male" required>
+                        <label class="form-check-label" for="validationDefaultSex">Férfi</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="radio" class="form-check-input" id="validationDefaultSex2" name="gender" value="female" required>
+                        <label class="form-check-label" for="validationDefaultSex2">Nő</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 my-2">
+                <label for="validationDefault05" class="form-label">Születési dátum</label>
+                <input type="date" class="form-control" id="validationDefaultDob" name="dob" max="" required>
+            </div>
+            <script>
+                // get the current year and subtract 16 from it
+                var maxYear = new Date().getFullYear() - 16;
+            
+                // set the maximum date to the last day of the year
+                var maxDate = new Date(maxYear, 11, 31);
+            
+                // format the date as yyyy-mm-dd
+                var formattedDate = maxDate.toISOString().slice(0, 10);
+            
+                // set the max attribute of the input field to the formatted date
+                document.getElementById("validationDefaultDob").setAttribute("max", formattedDate);
+            </script>
+            <div class="col-12 my-2">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                    <label class="form-check-label" for="invalidCheck2">
+                        Fogadd el a továbblépéshez!
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="1" name="remember" id="remember">
+                    <label class="form-check-label" for="remember">
+                        Emlékezz rám regisztráció után
+                    </label>
+                </div>
+            </div>
+            <div class="col-12 my-2">
+            <button class="btn btn-primary" id="submitbutton">Regisztrálok</button>
+            </div>
+        </div>
+      </form>
+</div>
+
+<script src="{{ url_for('static', filename='js/reg/pwvalidation.js') }}"></script>
+<script src="{{ url_for('static', filename='js/reg/submit.js') }}"></script>
+{% endblock %}
+</body>
+</html>

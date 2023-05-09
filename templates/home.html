@@ -2,7 +2,16 @@
 
 {% block content %}
 <div class="container-fluid">
-    
+    {% if logged_in %}
+        <h3 class="text-center">Welcome, {{ name }}!</h3>
+        <h3 class="text-center">
+          {% if gender == "M" %}
+            Te egy Férfi vagy
+          {% else %}
+            Te egy Nő vagy
+          {% endif %}
+        </h3>
+    {% endif %}
 </div>
 {% endblock %}
 </body>
