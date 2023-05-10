@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2023 at 09:39 PM
+-- Generation Time: May 10, 2023 at 09:47 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -69,6 +69,7 @@ CREATE TABLE IF NOT EXISTS `quizlist` (
   `quizname` varchar(255) NOT NULL,
   `quizcateg` int(3) NOT NULL,
   `creationdate` datetime NOT NULL,
+  `lastedit` datetime NOT NULL,
   `ownerid` varchar(255) NOT NULL,
   `seqcount` int(11) NOT NULL,
   `ispublic` tinyint(1) NOT NULL,

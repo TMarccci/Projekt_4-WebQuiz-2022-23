@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <h3 class="text-center my-5 py-3 text-uppercase">Új Quiz pakli készítése</h3>
 
-    <form class="col-12 mx-auto" method="POST" action="/createquiz" id="caardsform" novalidate>
+    <form class="col-11 mx-auto needs-validation" method="POST" action="/createquiz" id="caardsform" novalidate>
         <div id="paklitproperties" class="h4 mb-4">Pakli tulajdonságai</div>
         <div class="row mt-2 mb-4">
             <div class="col-12 col-md-4 col-lg-3 my-2">
@@ -16,7 +16,7 @@
             <div class="col-12 col-md-4 col-lg-3 my-2">
                 <label for="validationDefaultQuizName" class="form-label">Válaszd ki a kategóriát: </label>
                 <select class="form-select" aria-label="Válaszd ki a kategóriát" name="category" required>
-                    <option selected disabled>...</option>
+                    <option value="" selected disabled>...</option>
                     {% for category in categories %}
                         <option value="{{ category[0] }}">{{ category[1] }}</option>
                     {% endfor %}
