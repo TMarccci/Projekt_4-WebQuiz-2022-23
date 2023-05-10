@@ -7,7 +7,7 @@ import uuid
 def register():
     if 'loggedin' in session:
         return redirect(url_for('index'))
-    return render_template('register.html', title='QuizPro - Regisztráció', reg=True)
+    return render_template('register.html', title='QuizR - Regisztráció', reg=True)
 
 @app.route('/register', methods=['POST'])
 def register_post():
@@ -34,7 +34,7 @@ def register_post():
         cnx.close()
 
         flash('Ezzel az email címmel már regisztráltak!')
-        return render_template('register.html', title='QuizPro - Regisztráció')
+        return render_template('register.html', title='QuizR - Regisztráció')
 
     # Close cursor and connection
     cursor.close()
@@ -73,7 +73,7 @@ def register_post():
 def login():
     if 'loggedin' in session:
         return redirect(url_for('index'))
-    return render_template('login.html', title='QuizPro - Bejelentkezés', reg=False)
+    return render_template('login.html', title='QuizR - Bejelentkezés', reg=False)
 
 @app.route('/login', methods=['POST'])
 def login_post():
@@ -92,7 +92,7 @@ def login_post():
         cnx.close()
 
         flash('Hibás email cím vagy jelszó!')
-        return render_template('login.html', title='QuizPro - Bejelentkezés')
+        return render_template('login.html', title='QuizR - Bejelentkezés')
 
     # Close cursor and connection
     cursor.close()
@@ -114,7 +114,7 @@ def login_post():
         return redirect(url_for('index'))
 
     flash('Hibás email cím vagy jelszó!')
-    return render_template('login.html', title='QuizPro - Bejelentkezés')
+    return render_template('login.html', title='QuizR - Bejelentkezés')
 
 @app.route('/logout')
 def logout():

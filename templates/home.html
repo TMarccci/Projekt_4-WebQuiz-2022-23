@@ -2,16 +2,9 @@
 
 {% block content %}
 <div class="container-fluid">
-    {% if logged_in %}
-        <h3 class="text-center">Üdv, {{ name }}!</h3>
-        <h3 class="text-center">
-          {% if gender == "M" %}
-            Te egy Férfi vagy
-          {% else %}
-            Te egy Nő vagy
-          {% endif %}
-        </h3>
-    {% endif %}
+    <a href="{{ url_for('howtomakequiz') }}" class="btn text-uppercase">Hogyan kell készíteni</a>
+    <a href="{{ url_for('createquiz') }}" class="btn text-uppercase">Új quiz pakli készítése</a>
+    <a href="{{ url_for('policy') }}" class="btn text-uppercase">Adatkezelési tájékoztató</a>
 </div>
 {% endblock %}
 </body>

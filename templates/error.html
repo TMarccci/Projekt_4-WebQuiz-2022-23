@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <h3 class="text-center my-5 py-3">Hiba</h3>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="col-12 col-md-3 mx-auto text-center alert alert-danger">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+</div>
+
+{% endblock %}
+</body>
+</html>

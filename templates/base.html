@@ -33,21 +33,56 @@
     <title>{{ title }}</title>
   </head>
   <body>
-    <header>
-      {% if logged_in %}
-        <a href="/logout" class="btn">Kijelentkezés</a>
-      {% else %}
-        {% if reg %}
-          <a href="{{ url_for('index') }}" class="btn">Főoldal</a>
-          <a href="/login" class="btn">Bejelentkezés</a>
-        {% elif reg == False %}
-          <a href="{{ url_for('index') }}" class="btn">Főoldal</a>
-          <a href="/register" class="btn">Regisztráció</a>
+    <header class="navbar">
+      <div class="container-fluid">
+        <div class="navbar-brand" style="margin-top: -2px;">
+          <!-- Brand ide -->
+          <span>Q</span>
+        </div>
+
+          {% if home != True %}
+          <div class="me-auto">
+            <!-- Ha a felhasználó nem a főoldalon van akkor mutatja a főoldal gombot. -->
+              <a href="{{ url_for('index') }}" class="nav-link" aria-current="page">Főoldal</a>
+          </div>
+          {% endif %}
+
+        {% if logged_in %}
+        <!-- Ha be vagy jelentkezve, akkor mutatja a kijelentkezés gombot -->
+          <div class="d-flex mx-2 align-middle">
+            <div class="text-center row">
+              <span class="my-auto">
+                {% if gender == "M" %}
+                  Üdv, {{ name }}! Férfi
+                {% else %}
+                  Üdv, {{ name }}! Nő
+                {% endif %}
+              </span>
+            </div>
+            <div class="d-flex me-2 text-center">
+                <a href="/logout" class="nav-link mx-2" aria-current="page">Kijelentkezés</a>
+            </div>
+          </div>
+
         {% else %}
-          <a href="/login" class="btn">Bejelentkezés</a>
-          <a href="/register" class="btn">Regisztráció</a>
+        <!-- Nincs bejelentkezve a felhasznéló -->
+
+          <div class="d-flex me-2 text-center">
+            {% if reg %}
+              <!-- A felhasználó a regisztráció oldalon van -->
+                <a href="/login" class="nav-link me-3" aria-current="page">Bejelentkezés</a>
+            {% elif reg == False %}
+              <!-- A felhasználó a bejelentkezés oldalon van -->
+                <a href="/register" class="nav-link me-3" aria-current="page">Regisztráció</a>
+            {% else %}
+              <!-- A felhasználó a egyik bejelentkező oldalon sincs (Főoldal, Vagy aloldalak) -->
+                <a href="/register" class="nav-link me-3" aria-current="page">Regisztráció</a>
+                <a href="/login" class="nav-link me-3" aria-current="page">Bejelentkezés</a>
+            {% endif %}
+          </div>
+          
         {% endif %}
-      {% endif %}
+      </div>
     </header>
     <main class="container-fluid">
         {% block content %} {% endblock %}
