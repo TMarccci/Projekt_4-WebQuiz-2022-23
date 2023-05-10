@@ -4,6 +4,17 @@ $(document).ready(function() {
     });
   });
 
+  const togglepassword = document.getElementById('togglepassword');
+
+  togglepassword.addEventListener('click', function(e) {
+      // toggle the type attribute
+      const password = document.getElementById('validationDefaultPassword');
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+      // toggle the eye slash icon
+      this.classList.toggle('fa-eye-slash');
+  });
+
 (() => {
     'use strict'
     const form = document.querySelector('.needs-validation')

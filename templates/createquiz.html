@@ -3,8 +3,106 @@
 {% block content %}
 <div class="container-fluid">
     <h3 class="text-center my-5 py-3 text-uppercase">Új Quiz pakli készítése</h3>
+
+    <form class="col-12 mx-auto" method="POST" action="/createquiz" id="caardsform" novalidate>
+        <div id="paklitproperties" class="h4 mb-4">Pakli tulajdonságai</div>
+        <div class="row mt-2 mb-4">
+            <div class="col-12 col-md-4 col-lg-3 my-2">
+                <label for="validationDefaultQuizName" class="form-label">Quiz Pakli neve: </label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="validationDefaultQuizName" aria-describedby="inputGroupPrepend2" name="quizname" required>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3 my-2">
+                <label for="validationDefaultQuizName" class="form-label">Válaszd ki a kategóriát: </label>
+                <select class="form-select" aria-label="Válaszd ki a kategóriát" name="category" required>
+                    <option selected disabled>...</option>
+                    {% for category in categories %}
+                        <option value="{{ category[0] }}">{{ category[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3 my-2">
+                <div id="descriptionquizappearance" class="form-label">Válasd ki a pakli láthatóságát.</div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="ispublic" id="private" value="0" checked>
+                    <label class="form-check-label" for="private">
+                        Privát pakli
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="ispublic" id="public" value="1">
+                    <label class="form-check-label" for="public">
+                        Nyilvános pakli
+                    </label>
+                  </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="1" id="appearinsearch" name="appearinsearch" disabled>
+                    <label class="form-check-label" for="appearinsearch">
+                        Megjelenítés a keresőben
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-12 col-md-4 col-lg-3">
+                <div id="cards" class="h4">Káryták</div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <span class="lead">Kártyák száma: <span class="lead fw-bold" id="cardnumber">3</span></span>
+            </div>
+        </div>
+        <div class="row mb-4" id="cardslist">
+            {% for i in range(3) %}
+                <div class="flashcard">
+                    <div class="h5">{{ i+1 }}. kártya</div>
+                    <div class="col-12 mb-5">
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-5 my-4">
+                                <div id="card{{ i }}side1label" class="form-text">Oldal 1</div>
+                                <div class="input-group d-flex">
+                                    <div class="input-group-text">
+                                        <input type="radio" name="card{{ i }}side1type" id="card{{ i }}side1typetext" value="text" class="btn" checked></input>
+                                        <i class="fa fa-font px-1" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="input-group-text">
+                                        <input type="radio" name="card{{ i }}side1type" id="card{{ i }}side1typeimg" value="img" class="btn"></input>
+                                        <i class="fa fa-image px-1" aria-hidden="true"></i>
+                                    </div>
+                                    <input type="text" class="form-control" aria-label="text" aria-describedby="text" id="card{{ i }}side1text" name="card{{ i }}side1text" required/>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-5 my-4">
+                                <div id="card{{ i }}side2label" class="form-text">Oldal 2</div>
+                                <div class="input-group d-flex">
+                                    <div class="input-group-text">
+                                        <input type="radio" name="card{{ i }}side2type" id="card{{ i }}side2typetext" value="text" class="btn" checked></input>
+                                        <i class="fa fa-font px-1" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="input-group-text">
+                                        <input type="radio" name="card{{ i }}side2type" id="card{{ i }}side2typeimg" value="img" class="btn"></input>
+                                        <i class="fa fa-image px-1" aria-hidden="true"></i>
+                                    </div>
+                                    <input type="text" class="form-control" aria-label="text" aria-describedby="text" id="card{{ i }}side2text" name="card{{ i }}side2text" required/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row mb-4">
+            <div class="col-12 col-md-6 col-lg-5 mb-3">
+                <button type="button" class="btn btn-primary" id="addcard">+1 Káryta</button>
+            </div>
+            <div class="col-12 col-md-6 col-lg-6 mb-3">
+                <button type="submit" class="btn btn-success" id="submitbutton">Pakli befejezése és mentése</button>
+            </div>
+        </div>
+    </form>
 </div>
 
+<script src="{{ url_for('static', filename='js/quiz/script.js') }}"></script>
 {% endblock %}
 </body>
 </html>

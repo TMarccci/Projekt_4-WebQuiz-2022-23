@@ -22,6 +22,9 @@
                 <label for="validationDefaultPassword" class="form-label">Jelszó</label>
                 <div class="input-group d-flex">
                   <input type="password" class="form-control" aria-label="password" aria-describedby="password" id="validationDefaultPassword" name="password" required/>
+                  <div class="input-group-text">
+                    <i class="fa fa-eye" aria-hidden="true" id="togglepassword"></i>
+                  </div>
                 </div>
             </div>
             <div class="col-12">
@@ -49,6 +52,7 @@
             <div class="col-12 my-2">
                 <label for="validationDefault03" class="form-label">Email</label>
                 <input type="email" class="form-control" id="validationDefaultEmail" name="email" required>
+                <div id="emailHelp" class="form-text">Az email címeket bizalmasan kezeljük.</div>
             </div>
             <div class="col-12 my-2">
                 <label for="validationDefaultSex" class="form-label">Neme</label>
@@ -65,7 +69,7 @@
             </div>
             <div class="col-12 my-2">
                 <label for="validationDefault05" class="form-label">Születési dátum</label>
-                <input type="date" class="form-control" id="validationDefaultDob" name="dob" max="" required>
+                <input type="date" class="form-control" id="validationDefaultDob" name="dob" max="" min="1900-01-01" required>
             </div>
             <script>
                 // get the current year and subtract 16 from it

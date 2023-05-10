@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2023 at 04:37 PM
+-- Generation Time: May 10, 2023 at 09:39 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -18,10 +18,24 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `quizpro`
+-- Database: `quizr`
 --
-CREATE DATABASE IF NOT EXISTS `quizpro` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `quizpro`;
+CREATE DATABASE IF NOT EXISTS `quizr` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `quizr`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quizcategories`
+--
+
+DROP TABLE IF EXISTS `quizcategories`;
+CREATE TABLE IF NOT EXISTS `quizcategories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `categname` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -53,14 +67,16 @@ CREATE TABLE IF NOT EXISTS `quizlist` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `quizid` varchar(255) NOT NULL,
   `quizname` varchar(255) NOT NULL,
-  `quiztheme` varchar(255) NOT NULL,
+  `quizcateg` int(3) NOT NULL,
   `creationdate` datetime NOT NULL,
   `ownerid` varchar(255) NOT NULL,
   `seqcount` int(11) NOT NULL,
-  `isdraft` tinyint(1) NOT NULL,
+  `ispublic` tinyint(1) NOT NULL,
+  `appearonsearch` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `quizid` (`quizid`),
-  KEY `ownerid` (`ownerid`)
+  KEY `ownerid` (`ownerid`),
+  KEY `quizcateg` (`quizcateg`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -98,7 +114,8 @@ ALTER TABLE `quizcontents`
 -- Constraints for table `quizlist`
 --
 ALTER TABLE `quizlist`
-  ADD CONSTRAINT `quizlist_ibfk_1` FOREIGN KEY (`ownerid`) REFERENCES `users` (`userid`);
+  ADD CONSTRAINT `quizlist_ibfk_1` FOREIGN KEY (`ownerid`) REFERENCES `users` (`userid`),
+  ADD CONSTRAINT `quizlist_ibfk_2` FOREIGN KEY (`quizcateg`) REFERENCES `quizcategories` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
