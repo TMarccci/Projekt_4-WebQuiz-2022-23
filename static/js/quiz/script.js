@@ -27,7 +27,18 @@ addcard.addEventListener('click', () => {
     const card = document.createElement('div');
     card.classList.add('flashcard');
     card.innerHTML = `
-        <div class="h5">${ i+1 }. kártya</div>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-auto justify-content-center align-items-center">
+                <div class="h5" style="margin-top: 5px;">${ i+1 }. kártya</div>
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-alert removecardbtn" id="remove${ i+1 }btn">
+                    <i class="fa fa-trash px-1" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
         <div class="col-12 mb-5">
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-5 my-4">
