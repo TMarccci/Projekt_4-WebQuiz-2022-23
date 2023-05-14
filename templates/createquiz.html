@@ -56,7 +56,7 @@
             {% for i in range(3) %}
                 <div class="flashcard">
                     <div class="h5">{{ i+1 }}. kártya</div>
-                    <div class="col-12 mb-5">
+                    <div class="col-11 mb-5">
                         <div class="row">
                             <div class="col-12 col-md-6 col-lg-5 my-4">
                                 <div id="card{{ i }}side1label" class="form-text">Oldal 1</div>
@@ -87,6 +87,11 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-1 mb-5" id="remove{{ i }}btn">
+                        <button type="button" class="btn btn-alert removecardbtn">
+                            <i class="fa fa-trash px-1" aria-hidden="true"></i>
+                        </button>
                     </div>
                 </div>
             {% endfor %}

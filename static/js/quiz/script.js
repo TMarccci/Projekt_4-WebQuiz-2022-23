@@ -13,10 +13,6 @@ publicquiz.addEventListener('click', () => {
     apperainsearch.disabled = false;
 }, false);
 
-if (publicquiz.checked) {
-    apperainsearch.disabled = false;
-}
-
 const cardnumber = document.getElementById('cardnumber');
 const addcard = document.getElementById('addcard');
 const cardlist = document.getElementById('cardslist');
