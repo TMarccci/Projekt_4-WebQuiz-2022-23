@@ -11,6 +11,14 @@ var currentCardInt = parseInt(currentCard.replace('#card-', ''));
 var maxCard = document.getElementById('maxcardtext');
 var maxCardInt = parseInt(maxCard.innerHTML);
 
+// If current card is greater than max card, set to max card
+if (currentCardInt >= maxCardInt) {
+    currentCard = '#card-' + (maxCardInt - 1);
+    // Set URL to current card
+    window.location.href = currentCard;
+    currentCardInt = parseInt(currentCard.replace('#card-', ''));
+}
+
 // Set current card
 if (currentCardInt > 0) {
     document.getElementById('currentcardtext').innerHTML = currentCardInt+1;
