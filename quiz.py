@@ -26,6 +26,48 @@ def getUserData(userid):
 
     return username, gender
 
+def sendQuiz(quizz, username, gender):
+        # Get the quiz contents catetories
+        cnx = cnxpool.get_connection()
+        cursor = cnx.cursor()
+        cursor.execute("SELECT categname FROM quizcategories WHERE id = %s", (quizz[3],))
+        quizcategory = cursor.fetchone()[0]
+        cursor.close()
+        cnx.close()
+
+        # Get the quiz contents
+        cnx = cnxpool.get_connection()
+        cursor = cnx.cursor()
+        cursor.execute("SELECT * FROM quizcontents WHERE quizid = %s", (quizz[1],))
+        quizcontents = cursor.fetchall()
+        cursor.close()
+        cnx.close()
+
+        # Remove the first two elements from the list
+        for i in range(len(quizcontents)):
+            quizcontents[i] = quizcontents[i][2:]
+
+        if username and gender is not None:
+            # Handle errors
+            if quizcategory is None:
+                flash('Hiba történt! 0x007')
+                return render_template('error.html', title='QuizR - Hiba történt', logged_in=True, name=username, gender=gender)
+            if len(quizcontents) == 0:
+                flash('Hiba történt! 0x009')
+                return render_template('error.html', title='QuizR - Hiba történt', logged_in=True, name=username, gender=gender)
+            
+            return render_template('learnquiz.html', title='QuizR - ' + quizz[2], logged_in=True, name=username, gender=gender, quiz=quizz, quizcategory=quizcategory, quizcontents=quizcontents)
+        else:
+            # Handle errors
+            if quizcategory is None:
+                flash('Hiba történt! 0x008')
+                return render_template('error.html', title='QuizR - Hiba történt', logged_in=False)
+            if len(quizcontents) == 0:
+                flash('Hiba történt! 0x010')
+                return render_template('error.html', title='QuizR - Hiba történt', logged_in=False)
+
+            return render_template('learnquiz.html', title='QuizR - ' + quizz[2], logged_in=False, quiz=quizz, quizcategory=quizcategory, quizcontents=quizcontents)
+
 @app.route('/')
 def index():
     # If the session contains the loggedin variable, we can assume the user is logged in.
@@ -133,5 +175,40 @@ def createquiz_post():
 
 @app.route('/quiz/<quizid>')
 def quiz(quizid):
-    # Return quizid as text temporarily
-    return quizid
+    # Search quiz in database
+    cnx = cnxpool.get_connection()
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM quizlist WHERE quizid = %s", (quizid,))
+    quiz = cursor.fetchone()
+    cursor.close()
+    cnx.close()
+
+    if 'loggedin' in session:
+        userid = session['id']
+        username, gender = getUserData(userid)[0], getUserData(userid)[1]
+
+    # If the quiz doesnt exist, return error
+    if quiz is None:
+        # If the user is logged in, return the error page with the logged in template
+        if 'loggedin' in session:
+            flash('A kért quiz nem található! 0x002')
+            return render_template('error.html', title='QuizR - Quiz nem található', logged_in=True, name=username, gender=gender)
+        else:
+            flash('A kért quiz nem található! 0x003')
+            return render_template('error.html', title='QuizR - Quiz nem található', logged_in=False)
+    else:
+        # If quiz is private and the user is not logged in, return error
+        if quiz[8] == 0:
+            if 'loggedin' in session:
+                # If the owner is not the user, return error
+                if quiz[6] != userid:
+                    flash('A kért quiz nem nyilvános! 0x004')
+                    return render_template('error.html', title='QuizR - Quiz nem nyilvános', logged_in=True, name=username, gender=gender)
+                else:
+                    flash('A quized mások számára nem megtekinthető! 0x006')
+                    return sendQuiz(quiz, username, gender)
+            else:
+                flash('A kért quiz nem nyilvános! 0x005')
+                return render_template('error.html', title='QuizR - Quiz nem nyilvános', logged_in=False)
+        else:
+            return sendQuiz(quiz, None, None)

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <h3 class="text-center mt-5 text-uppercase">{{ quiz[2] }}</h3>
+    <h5 class="text-center mb-5 text-uppercase">{{ quizcategory }}</h5>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="col-12 col-md-7 mx-auto text-center alert alert-info text-uppercase mb-5">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <div class="container">
+        <div class="row mx-auto">
+            <!-- quizcontents list is above -->
+            <!-- Example of data -->
+            <!-- [(0, 'text', 'text', '1', 'Ein'), (1, 'text', 'text', '2', 'Zwei'), (2, 'text', 'text', '3', 'Drei')] -->
+            <div class="col-8">
+                <div class="tab-content" id="cardsholder">
+                    {% for i in range(quiz[7]) %}
+                        {% if i == 0 %}
+                            <div class="tab-pane fade show active" id="card-{{ i }}">
+                        {% else %}
+                            <div class="tab-pane fade" id="card-{{ i }}">
+                        {% endif %}
+                                <span id="card{{ i }}front">
+                                    {% if quizcontents[i][1] == "text" %}
+                                        {{ quizcontents[i][3] }}
+                                    {% else %}
+                                        <img src="{{ quizcontents[i][3] }}" alt="{{ quizcontents[i][3] }}" class="img-fluid">
+                                    {% endif %}
+                                </span>
+                                <span id="card{{ i }}back">
+                                    {% if quizcontents[i][2] == "text" %}
+                                        {{ quizcontents[i][4] }}
+                                    {% else %}
+                                        <img src="{{ quizcontents[i][4] }}" alt="{{ quizcontents[i][4] }}" class="img-fluid">
+                                    {% endif %}
+                                </span>
+                            </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5 mb-2">
+            <span class="text-center">Kártya: <span id="currentcardtext">1</span> / <span id="maxcardtext">{{ quiz[7] }}</span></span>
+        </div>
+        <div class="row mx-auto">
+            <div class="col-12">
+                <nav aria-label="Kártya lapozó">
+                    <ul class="pagination justify-content-center">
+                      <li class="page-item">
+                        <a class="page-link" onclick="prevCard()" aria-label="Előző">
+                          <span aria-hidden="true">&laquo;</span>
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" onclick="nextCard()" aria-label="Következő">
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/learn/script.js') }}"></script>
+{% endblock %}
+</body>
+</html>

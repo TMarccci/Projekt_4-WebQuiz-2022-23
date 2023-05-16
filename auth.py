@@ -33,7 +33,7 @@ def register_post():
         cursor.close()
         cnx.close()
 
-        flash('Ezzel az email címmel már regisztráltak!')
+        flash('Ezzel az email címmel már regisztráltak! 0x011')
         return render_template('auth/register.html', title='QuizR - Regisztráció')
 
     # Close cursor and connection
@@ -91,7 +91,7 @@ def login_post():
         cursor.close()
         cnx.close()
 
-        flash('Hibás email cím vagy jelszó!')
+        flash('Hibás email cím vagy jelszó! 0x012')
         return render_template('auth/login.html', title='QuizR - Bejelentkezés')
 
     # Close cursor and connection
@@ -113,7 +113,7 @@ def login_post():
 
         return redirect(url_for('index'))
 
-    flash('Hibás email cím vagy jelszó!')
+    flash('Hibás email cím vagy jelszó! 0x012')
     return render_template('auth/login.html', title='QuizR - Bejelentkezés')
 
 @app.route('/logout')
