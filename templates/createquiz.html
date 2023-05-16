@@ -62,7 +62,8 @@
                                 <div class="h5" style="margin-top: 5px;">{{ i+1 }}. kártya</div>
                             </div>
                             <div class="col-2">
-                                <button type="button" class="btn btn-alert removecardbtn" id="remove{{ i }}btn" onclick="deletecard({{ i }})">
+                                {% set j = 'deletecard(' ~ i ~ ')' %}
+                                <button type="button" class="btn btn-alert removecardbtn" id="remove{{ i }}btn" onclick="{{j}}">
                                     <i class="fa fa-trash px-1" aria-hidden="true"></i>
                                 </button>
                             </div>
