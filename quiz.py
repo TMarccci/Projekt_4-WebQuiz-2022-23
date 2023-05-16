@@ -1,5 +1,6 @@
 from flask import session, redirect, request, url_for, render_template, Response, jsonify, flash
 from app import app, cnxpool
+import uuid
 
 def getUserData(userid):
     # Get the user's gender and username
@@ -84,5 +85,53 @@ def createquiz_post():
     if 'loggedin' not in session:
         return Response(status=403)
     else:
-        print(request.form)
-        return Response(status=200)
+        # If the form doesnt have the required fields, return error
+        if 'quizname' not in request.form or 'category' not in request.form or 'ispublic' not in request.form:
+            return Response(status=400)
+        else:
+            # Get the form data
+            quizname = request.form['quizname']
+            category = request.form['category']
+            ispublic = request.form['ispublic']
+            if 'appearinsearch' in request.form:
+                appearinsearch = request.form['appearinsearch']
+            else:
+                appearinsearch = 0
+            ownerid = session['id']
+            quizid = str(uuid.uuid4())
+            seqcount = request.form['seqcount']
+
+            # Append the quiz to the database
+            cnx = cnxpool.get_connection()
+            cursor = cnx.cursor()
+            cursor.execute("INSERT INTO quizlist (quizid, quizname, quizcateg, creationdate, lastedit, ownerid, seqcount, ispublic, appearonsearch) VALUES (%s, %s, %s, NOW(), NOW(), %s, %s, %s, %s)", (quizid, quizname, category, ownerid, seqcount, ispublic, appearinsearch))
+
+            # Commit the changes
+            cnx.commit()
+            cursor.close()
+            cnx.close()
+
+            # Append the cards to quizcontents
+            for i in range(int(seqcount)):
+                seqnum = i
+                sideonetype = request.form['card' + str(i) + 'side1type']
+                sideonecontent = request.form['card' + str(i) + 'side1text']
+                sidetwotype = request.form['card' + str(i) + 'side2type']
+                sidetwocontent = request.form['card' + str(i) + 'side2text']
+                
+                cnx = cnxpool.get_connection()
+                cursor = cnx.cursor()
+                cursor.execute("INSERT INTO quizcontents (quizid, seqnum, sideonetype, sidetwotype, sideone, sidetwo) VALUES (%s, %s, %s, %s, %s, %s)", (quizid, seqnum, sideonetype, sidetwotype, sideonecontent, sidetwocontent))
+
+                # Commit the changes
+                cnx.commit()
+                cursor.close()
+                cnx.close()
+
+            # Redirect to the quiz page
+            return redirect(url_for('quiz', quizid=quizid))
+
+@app.route('/quiz/<quizid>')
+def quiz(quizid):
+    # Return quizid as text temporarily
+    return quizid
