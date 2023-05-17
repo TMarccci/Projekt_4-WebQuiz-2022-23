@@ -47,6 +47,14 @@ def sendQuiz(quizz, username, gender):
         for i in range(len(quizcontents)):
             quizcontents[i] = quizcontents[i][2:]
 
+        # Get who created the quiz
+        cnx = cnxpool.get_connection()
+        cursor = cnx.cursor()
+        cursor.execute("SELECT username FROM users WHERE userid = %s", (quizz[6],))
+        quizcreator = cursor.fetchone()[0]
+        cursor.close()
+        cnx.close()
+
         if username and gender is not None:
             # Handle errors
             if quizcategory is None:
@@ -56,7 +64,7 @@ def sendQuiz(quizz, username, gender):
                 flash('Hiba történt! 0x009')
                 return render_template('error.html', title='QuizR - Hiba történt', logged_in=True, name=username, gender=gender)
             
-            return render_template('learnquiz.html', title='QuizR - ' + quizz[2], logged_in=True, name=username, gender=gender, quiz=quizz, quizcategory=quizcategory, quizcontents=quizcontents)
+            return render_template('learnquiz.html', title='QuizR - ' + quizz[2], logged_in=True, name=username, gender=gender, quiz=quizz, quizcategory=quizcategory, quizcontents=quizcontents, quizcreator=quizcreator)
         else:
             # Handle errors
             if quizcategory is None:
@@ -66,7 +74,7 @@ def sendQuiz(quizz, username, gender):
                 flash('Hiba történt! 0x010')
                 return render_template('error.html', title='QuizR - Hiba történt', logged_in=False)
 
-            return render_template('learnquiz.html', title='QuizR - ' + quizz[2], logged_in=False, quiz=quizz, quizcategory=quizcategory, quizcontents=quizcontents)
+            return render_template('learnquiz.html', title='QuizR - ' + quizz[2], logged_in=False, quiz=quizz, quizcategory=quizcategory, quizcontents=quizcontents, quizcreator=quizcreator)
 
 @app.route('/')
 def index():
