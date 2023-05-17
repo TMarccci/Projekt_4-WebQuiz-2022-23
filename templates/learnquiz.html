@@ -6,10 +6,12 @@
     <h5 class="text-center mb-5 text-uppercase">{{ quizcategory }}</h5>
     <p class="text-center mb-5">
         Készítette: {{ quizcreator }}
-         - Készítve: {{ quiz[4] }}
-         {% if quiz[4] != quiz[5] %}
-         - Legutóbb módosítva: {{ quiz[5] }}
-         {% endif %}
+        <br class="d-md-none">
+        <strong class="d-none d-md-inline">-</strong> Készítve: {{ quiz[4] }}
+        <br class="d-md-none">
+        {% if quiz[4] != quiz[5] %}
+        <strong class="d-none md-inline">-</strong> Legutóbb módosítva: {{ quiz[5] }}
+        {% endif %}
     </p>
     {% with messages = get_flashed_messages() %}
         {% if messages %}

@@ -5,9 +5,11 @@ import uuid
 
 @app.route('/register')
 def register():
+    description = "A regisztrációhoz meg kell adni egy felhasználónevet, email címet, jelszót, nemet és születési dátumot. A regisztrációhoz még el kell fogadni az adatkezelési tájékoztató ismeretét. A regisztráció sikeres befejezése után a felhasználó ha bejelölte automatikusan be lesz jelentkezve."
+
     if 'loggedin' in session:
         return redirect(url_for('index'))
-    return render_template('auth/register.html', title='QuizR - Regisztráció', reg=True)
+    return render_template('auth/register.html', title='QuizR - Regisztráció', reg=True, description=description)
 
 @app.route('/register', methods=['POST'])
 def register_post():
@@ -34,7 +36,7 @@ def register_post():
         cnx.close()
 
         flash('Ezzel az email címmel már regisztráltak! 0x011')
-        return render_template('auth/register.html', title='QuizR - Regisztráció')
+        return redirect(url_for('register'))
 
     # Close cursor and connection
     cursor.close()
@@ -71,9 +73,11 @@ def register_post():
 
 @app.route('/login')
 def login():
+    description = "QuizR bejelentkezési felülete. A bejelentkezéshez meg kell adni az email címet és a jelszót. A bejelentkezés sikeres befejezése után a felhasználó automatikusan be lesz jelentkezve."
+
     if 'loggedin' in session:
         return redirect(url_for('index'))
-    return render_template('auth/login.html', title='QuizR - Bejelentkezés', reg=False)
+    return render_template('auth/login.html', title='QuizR - Bejelentkezés', reg=False, description=description)
 
 @app.route('/login', methods=['POST'])
 def login_post():
@@ -92,7 +96,7 @@ def login_post():
         cnx.close()
 
         flash('Hibás email cím vagy jelszó! 0x012')
-        return render_template('auth/login.html', title='QuizR - Bejelentkezés')
+        return redirect(url_for('login'))
 
     # Close cursor and connection
     cursor.close()
@@ -114,7 +118,7 @@ def login_post():
         return redirect(url_for('index'))
 
     flash('Hibás email cím vagy jelszó! 0x012')
-    return render_template('auth/login.html', title='QuizR - Bejelentkezés')
+    return redirect(url_for('login'))
 
 @app.route('/logout')
 def logout():
