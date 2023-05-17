@@ -1,30 +1,4 @@
-from flask import session, redirect, request, url_for, render_template, Response, jsonify, flash
-from app import app, cnxpool
-import uuid
-
-def getUserData(userid):
-    # Get the user's gender and username
-    cnx = cnxpool.get_connection()
-    cursor = cnx.cursor()
-    cursor.execute("SELECT * FROM users WHERE userid = %s", (userid,))
-    user = cursor.fetchone()
-    cursor.close()
-    cnx.close()
-
-    # If found continue else return error
-    if user is None:
-        flash('Felhasználó nem található az adatbázisban azonosító alapján! Távolítson el minden sütiket és jelentkezzen be újra!')
-        return render_template('error.html', title='QuizR - Hiba', logged_in=True)
-    
-    username = user[3]
-    gender = user[8]
-
-    if gender == 0:
-        gender = "M"
-    else:
-        gender = "W"
-
-    return username, gender
+from app import *
 
 def sendQuiz(quizz, username, gender):
         descerror = "Valami hiba történt. A hiba leírása mellett megjelenik a hiba kódja is. A hiba kódját a fejlesztőknek kell elküldeniük, hogy javítsák a hibát vagy utánajárjanak a problémának."
@@ -67,7 +41,7 @@ def sendQuiz(quizz, username, gender):
                 flash('Hiba történt! 0x009')
                 return render_template('error.html', title='QuizR - Hiba történt', logged_in=True, name=username, gender=gender, description=descerror)
             
-            return render_template('learnquiz.html', title='QuizR - ' + quizcategory + ' - ' + quizz[2], logged_in=True, name=username, gender=gender, quiz=quizz, quizcategory=quizcategory, quizcontents=quizcontents, quizcreator=quizcreator, description=description)
+            return render_template('quizes/learnquiz.html', title='QuizR - ' + quizcategory + ' - ' + quizz[2], logged_in=True, name=username, gender=gender, quiz=quizz, quizcategory=quizcategory, quizcontents=quizcontents, quizcreator=quizcreator, description=description)
         else:
             # Handle errors
             if quizcategory is None:
@@ -77,46 +51,7 @@ def sendQuiz(quizz, username, gender):
                 flash('Hiba történt! 0x010')
                 return render_template('error.html', title='QuizR - Hiba történt', logged_in=False, description=descerror)
 
-            return render_template('learnquiz.html', title='QuizR - ' + quizcategory + ' - ' + quizz[2], logged_in=False, quiz=quizz, quizcategory=quizcategory, quizcontents=quizcontents, quizcreator=quizcreator, description=description)
-
-@app.route('/')
-def index():
-    description = "A QuizR egy webes alkalmazás, amely lehetővé teszi a felhasználók számára, hogy saját kvíz paklikat készítsenek, és azokat megosszák másokkal. A QuizR egyben lehetőséget biztosít a felhasználók számára, hogy mások által készített kvíz paklikat tanuljanak, és teszteljék tudásukat."
-
-    # If the session contains the loggedin variable, we can assume the user is logged in.
-    if 'loggedin' in session:
-        userid = session['id']
-        username, gender = getUserData(userid)[0], getUserData(userid)[1]
-
-        return render_template('home.html', title='QuizR - Főoldal', logged_in=True, home=True, name=username, gender=gender, description=description)
-    else:
-        return render_template('home.html', title='QuizR - Főoldal', logged_in=False, home=True, description=description)
-    
-@app.route('/policy')
-def policy():
-    description = "Az adatkezelési tájékoztatóban leírtakat a felhasználóknak el kell fogadniuk a regisztrációhoz. Az adatkezelési tájékoztatóban leírtakat a felhasználók bármikor elolvashatják."
-
-    # If the session contains the loggedin variable, we can assume the user is logged in.
-    if 'loggedin' in session:
-        userid = session['id']
-        username, gender = getUserData(userid)[0], getUserData(userid)[1]
-
-        return render_template('policy.html', title='QuizR - Adatkezelési tájékoztató', logged_in=True, name=username, gender=gender, description=description)
-    else:
-        return render_template('policy.html', title='QuizR - Adatkezelési tájékoztató', logged_in=False, description=description)
-    
-@app.route('/howtomakequiz')
-def howtomakequiz():
-    description = "A Hogyan csinálj quizt oldalon a felhasználók megismerhetik a QuizR használatát. Különböző lehetőségek, funkciók használatát mutatja be. Alapszintű használati útmutató."
-
-    # If the session contains the loggedin variable, we can assume the user is logged in.
-    if 'loggedin' in session:
-        userid = session['id']
-        username, gender = getUserData(userid)[0], getUserData(userid)[1]
-
-        return render_template('howtomakequiz.html', title='QuizR - Quiz pakli készítés útmutató', logged_in=True, name=username, gender=gender, description=description)
-    else:
-        return render_template('howtomakequiz.html', title='QuizR - Quiz pakli készítés útmutató', logged_in=False, description=description)
+            return render_template('quizes/learnquiz.html', title='QuizR - ' + quizcategory + ' - ' + quizz[2], logged_in=False, quiz=quizz, quizcategory=quizcategory, quizcontents=quizcontents, quizcreator=quizcreator, description=description)
 
 @app.route('/createquiz')
 def createquiz():
@@ -136,7 +71,7 @@ def createquiz():
         cursor.close()
         cnx.close()
 
-        return render_template('createquiz.html', title='QuizR - Új Quiz pakli készítése', logged_in=True, name=username, gender=gender, categories=categories, description=description)
+        return render_template('quizes/createquiz.html', title='QuizR - Új Quiz pakli készítése', logged_in=True, name=username, gender=gender, categories=categories, description=description)
     else:
         flash('Quiz pakli készítéséhez jelentkezz be vagy regisztrálj! 0x013')
         return redirect(url_for('login'))

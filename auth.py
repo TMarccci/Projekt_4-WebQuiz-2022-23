@@ -1,7 +1,5 @@
-from flask import session, redirect, request, url_for, render_template, Response, jsonify, flash
-from app import app, cnxpool
+from app import *
 from werkzeug.security import generate_password_hash, check_password_hash
-import uuid
 
 @app.route('/register')
 def register():
