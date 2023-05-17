@@ -218,18 +218,26 @@ def quiz(quizid):
             flash('A kért quiz nem található! 0x003')
             return render_template('error.html', title='QuizR - Quiz nem található', logged_in=False, description=descerror)
     else:
-        # If quiz is private and the user is not logged in, return error
-        if quiz[8] == 0:
-            if 'loggedin' in session:
-                # If the owner is not the user, return error
+        # Logged in
+        if 'loggedin' in session:
+            # If quiz is private
+            if quiz[8] == 0:
                 if quiz[6] != userid:
                     flash('A kért quiz nem nyilvános! 0x004')
                     return render_template('error.html', title='QuizR - Quiz nem nyilvános', logged_in=True, name=username, gender=gender, description=descerror)
                 else:
                     flash('A quized mások számára nem megtekinthető! 0x006')
                     return sendQuiz(quiz, username, gender)
+            # If quiz is public
             else:
+                return sendQuiz(quiz, username, gender)
+        # Not logged in
+        else:
+            # If quiz is private
+            if quiz[8] == 0:
                 flash('A kért quiz nem nyilvános! 0x005')
                 return render_template('error.html', title='QuizR - Quiz nem nyilvános', logged_in=False, description=descerror)
-        else:
-            return sendQuiz(quiz, None, None)
+            # If quiz is public
+            else:
+                return sendQuiz(quiz, None, None)
+        

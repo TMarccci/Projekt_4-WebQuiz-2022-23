@@ -22,7 +22,11 @@
     {% endwith %}
     <div class="container">
         <div class="row mx-auto">
-            <div class="col-2"></div>
+            <div class="col-2 d-flex align-items-center justify-content-center">
+                <a class="page-link" onclick="prevCard()" aria-label="Előző">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </div>
             <div class="col-8">
                 <div class="tab-content text-center" id="cardsholder">
                     {% for i in range(quiz[7]) %}
@@ -49,7 +53,11 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col-2"></div>
+            <div class="col-2 d-flex align-items-center justify-content-center">
+                <a class="page-link" onclick="nextCard()" aria-label="Következő">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </div>
         </div>
         <div class="row my-5 py-2">
             <div class="col-12 col-md-7 mx-auto text-center flipbtn">
@@ -58,24 +66,6 @@
         </div>
         <div class="row mb-2">
             <span class="text-center">Kártya: <span id="currentcardtext">1</span> / <span id="maxcardtext">{{ quiz[7] }}</span></span>
-        </div>
-        <div class="row mx-auto">
-            <div class="col-12">
-                <nav aria-label="Kártya lapozó">
-                    <ul class="pagination justify-content-center">
-                      <li class="page-item">
-                        <a class="page-link" onclick="prevCard()" aria-label="Előző">
-                          <span aria-hidden="true">&laquo;</span>
-                        </a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" onclick="nextCard()" aria-label="Következő">
-                          <span aria-hidden="true">&raquo;</span>
-                        </a>
-                      </li>
-                    </ul>
-                </nav>
-            </div>
         </div>
     </div>
 </div>
