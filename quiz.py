@@ -119,7 +119,7 @@ def createquiz():
 
         return render_template('createquiz.html', title='QuizR - Új Quiz pakli készítése', logged_in=True, name=username, gender=gender, categories=categories)
     else:
-        flash('Quiz pakli készítéséhez jelentkezz be vagy regisztrálj!')
+        flash('Quiz pakli készítéséhez jelentkezz be vagy regisztrálj! 0x013')
         return redirect(url_for('login'))
     
 @app.route('/createquiz', methods=['POST'])

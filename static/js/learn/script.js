@@ -28,11 +28,13 @@ if (currentCardInt > 0) {
 for (var i = 0; i < maxCardInt; i++) {
     document.getElementById('card-' + i).classList.remove('show');
     document.getElementById('card-' + i).classList.remove('active');
+    document.getElementById('card-' + i).classList.remove('d-flex');
 }
 
 // Show current card
 document.getElementById('card-' + currentCardInt).classList.add('show');
 document.getElementById('card-' + currentCardInt).classList.add('active');
+document.getElementById('card-' + currentCardInt).classList.add('d-flex');
 
 
 // prevCard function
@@ -40,9 +42,6 @@ document.getElementById('card-' + currentCardInt).classList.add('active');
 prevCard = function() {
     var currentCard = document.getElementById('currentcardtext');
     var currentCardInt = parseInt(currentCard.innerHTML);
-
-    var maxCard = document.getElementById('maxcardtext');
-    var maxCardInt = parseInt(maxCard.innerHTML);
 
     if (currentCardInt > 1) {
         // Set currentCard
@@ -57,12 +56,14 @@ prevCard = function() {
         // Hide current card
         document.getElementById('card-' + currentCardInt).classList.remove('show');
         document.getElementById('card-' + currentCardInt).classList.remove('active');
+        document.getElementById('card-' + currentCardInt).classList.remove('d-flex');
 
         currentCardInt -= 1;
 
         // Show next card
         document.getElementById('card-' + currentCardInt).classList.add('show');
         document.getElementById('card-' + currentCardInt).classList.add('active');
+        document.getElementById('card-' + currentCardInt).classList.add('d-flex');
     }
 }
 
@@ -87,11 +88,35 @@ nextCard = function() {
         // Hide current card
         document.getElementById('card-' + currentCardInt).classList.remove('show');
         document.getElementById('card-' + currentCardInt).classList.remove('active');
+        document.getElementById('card-' + currentCardInt).classList.remove('d-flex');
 
         currentCardInt += 1;
 
         // Show next card
         document.getElementById('card-' + currentCardInt).classList.add('show');
         document.getElementById('card-' + currentCardInt).classList.add('active');
+        document.getElementById('card-' + currentCardInt).classList.add('d-flex');
+    }
+}
+
+// Flip card function
+flipCard = function() {
+    var currentCard = document.getElementById('currentcardtext');
+    var currentCardInt = parseInt(currentCard.innerHTML);
+    var currentCardInt = currentCardInt - 1;
+
+    // d-none to hidden
+
+    // If front card, flip to back
+    if (document.getElementById('card' + currentCardInt + 'front').classList.contains('d-none')) {
+        // Show front card
+        document.getElementById('card' + currentCardInt + 'front').classList.remove('d-none');
+        // Hide back card
+        document.getElementById('card' + currentCardInt + 'back').classList.add('d-none');
+    } else {
+        // Show back card
+        document.getElementById('card' + currentCardInt + 'back').classList.remove('d-none');
+        // Hide front card
+        document.getElementById('card' + currentCardInt + 'front').classList.add('d-none');
     }
 }

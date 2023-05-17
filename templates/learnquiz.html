@@ -13,34 +13,41 @@
     {% endwith %}
     <div class="container">
         <div class="row mx-auto">
+            <div class="col-2"></div>
             <div class="col-8">
-                <div class="tab-content" id="cardsholder">
+                <div class="tab-content text-center" id="cardsholder">
                     {% for i in range(quiz[7]) %}
                         {% if i == 0 %}
-                            <div class="tab-pane fade show active" id="card-{{ i }}">
+                            <div class="quizcard tab-pane fade show active d-flex align-items-center justify-content-center" id="card-{{ i }}">
                         {% else %}
-                            <div class="tab-pane fade" id="card-{{ i }}">
+                            <div class="quizcard tab-pane fade align-items-center justify-content-center" id="card-{{ i }}">
                         {% endif %}
-                                <span id="card{{ i }}front">
+                                <span id="card{{ i }}front" class="align-middle">
                                     {% if quizcontents[i][1] == "text" %}
                                         {{ quizcontents[i][3] }}
                                     {% else %}
-                                        <img src="{{ quizcontents[i][3] }}" alt="Ha ezt látod, akkor a kép URL hibás" class="img-fluid">
+                                        <img src="{{ quizcontents[i][3] }}" alt="Ha ezt látod, akkor a kép URL hibás" class="img-fluid cardimg">
                                     {% endif %}
                                 </span>
-                                <span id="card{{ i }}back">
+                                <span id="card{{ i }}back" class="d-none align-middle">
                                     {% if quizcontents[i][2] == "text" %}
                                         {{ quizcontents[i][4] }}
                                     {% else %}
-                                        <img src="{{ quizcontents[i][4] }}" alt="Ha ezt látod, akkor a kép URL hibás" class="img-fluid">
+                                        <img src="{{ quizcontents[i][4] }}" alt="Ha ezt látod, akkor a kép URL hibás" class="img-fluid cardimg">
                                     {% endif %}
                                 </span>
                             </div>
                     {% endfor %}
                 </div>
             </div>
+            <div class="col-2"></div>
         </div>
-        <div class="row mt-5 mb-2">
+        <div class="row my-5 py-2">
+            <div class="col-12 col-md-7 mx-auto text-center flipbtn">
+                <button class="btn btn-primary" onclick="flipCard()">Fordítás</button>
+            </div>
+        </div>
+        <div class="row mb-2">
             <span class="text-center">Kártya: <span id="currentcardtext">1</span> / <span id="maxcardtext">{{ quiz[7] }}</span></span>
         </div>
         <div class="row mx-auto">

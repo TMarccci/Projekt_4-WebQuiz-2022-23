@@ -23,3 +23,8 @@
 - 0x010 - Nem sikerült betölteni a quiz pakli kártyáit, felhasználó nincs bejelentkezve
 - 0x011 - Már van ezzel az email címmel regisztrált felhasználó
 - 0x012 - Nem létzeik felhasználó ezzel az email címmel, vagy a jelszó nem megfelelő
+- 0x013 - Új pakli készítéséhez be kell jelentkezni
+
+## CSS Szabadon használható osztályok formázáshoz
+- .quizcard - Quiz kártya 
+- .flipbtn - Quiz kártya fordítás gomb 
