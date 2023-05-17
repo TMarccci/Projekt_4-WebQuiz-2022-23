@@ -1,3 +1,9 @@
+* {
+    --color1: #75A8AC;
+    --color2: #98D0D4;
+    --color3: #4B878B;
+}
+
 .wrong .fa-check
 {
     display: none;
