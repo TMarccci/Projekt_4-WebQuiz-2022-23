@@ -42,3 +42,4 @@ def getUserData(userid):
 import auth
 import quiz
 import alpage
+import profiles

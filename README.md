@@ -24,6 +24,8 @@
 - 0x011 - Már van ezzel az email címmel regisztrált felhasználó
 - 0x012 - Nem létzeik felhasználó ezzel az email címmel, vagy a jelszó nem megfelelő
 - 0x013 - Új pakli készítéséhez be kell jelentkezni
+- 0x014 - Nem találhatü a felhasználó profilja, felhasználó be van jelentkezve
+- 0x015 - Nem találhatü a felhasználó profilja, felhasználó nincs bejelentkezve
 
 ## Leírások
 - Főoldal: A QuizR egy webes alkalmazás, amely lehetővé teszi a felhasználók számára, hogy saját kvíz paklikat készítsenek, és azokat megosszák másokkal. A QuizR egyben lehetőséget biztosít a felhasználók számára, hogy mások által készített kvíz paklikat tanuljanak, és teszteljék tudásukat.
@@ -33,6 +35,7 @@
 - Hogyan csinálj quizt: A Hogyan csinálj quizt oldalon a felhasználók megismerhetik a QuizR használatát. Különböző lehetőségek, funkciók használatát mutatja be. Alapszintű használati útmutató.
 - Új quiz pakli létrehozása: A felhasználók új quiz paklikat hozhatnak létre. A quiz pakli létrehozásához meg kell adni a quiz pakli nevét, kategóriáját és a quiz pakli kártyáit. A quiz pakli létrehozása után a felhasználó átkerül a kész quiz pakli oldalrára.
 - Quiz: Tanuld meg a kártyákat könnyebben. Nézd meg a megoldásokat, ha mégsem sikerülne. Majd próbáld meg ismét. A QuizR segít a tanulásban.
+- Profil: A felhasználók profiljának megtekintése. A profil oldalon a felhasználók megtekinthetik a saját adataikat, a saját quiz paklijaikat, a saját kedvenc quiz paklijaikat, a saját kedvenc kategóriáikat és a saját kedvenc felhasználóikat vagy másokét.
 - Hiba: Valami hiba történt. A hiba leírása mellett megjelenik a hiba kódja is. A hiba kódját a fejlesztőknek kell elküldeniük, hogy javítsák a hibát vagy utánajárjanak a problémának.
 
 ## CSS Szabadon használható osztályok formázáshoz

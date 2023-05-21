@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    {% if self %}
+        <h3 class="text-center mt-5 text-uppercase">
+            {{ profile[3] }} (Te)
+            {% if profile[8] == 0 %}
+                Férfi
+            {% else %}
+                Nő
+            {% endif %}
+        </h3>
+        <p class="text-center mb-5">Utoljára bejelentkeztél: {{ profile[7] }}</p>
+    {% else %}
+        <h3 class="text-center mt-5 text-uppercase">
+            {{ profile[3] }}
+            {% if profile[8] == 0 %}
+                Férfi
+            {% else %}
+                Nő
+            {% endif %}
+        </h3>
+        <p class="text-center mb-5">Utoljára bejelentkezett: {{ profile[7] }}</p>
+    {% endif %}
+
+    {% if quizzescount != 0 %}
+    <div class="row mb-3">
+        <div class="col-12 col-md-3">
+            <h5>Quizek: </h5>
+        </div>
+    </div>
+    <div class="row mb-3">
+        {% for quiz in range(quizzescount) %}
+        <div class="col-12 col-md-4 col-md-3">
+            <a href="/quiz/{{ quizzes[quiz][1] }}">{{ quizzes[quiz][2] }}</a>
+            <p>{{ categnames[quiz] }}</p>
+            <p>{{ quizzes[quiz][7] }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="row mb-3">
+        <div class="col-12 col-md-3">
+            {% if self %}
+                <h5>Még nem készítettél quizeket.</h5>
+            {% else %}
+                <h5>Még nem készített quizeket a felhasználó.</h5>
+            {% endif %} 
+        </div>
+    </div>
+    {% endif %}
+
+    {% if self %}
+    <div class="row mb-3">
+        <div class="col-12 col-md-3">
+            <h5>Fiók kezelése: </h5>
+        </div>
+    </div>
+    <div class="row mb-3 ps-3">
+        <div class="col-12 col-md-8">
+            <span class="lead">Adatok szerkesztése: </span>
+            <div class="row mb-5">
+                <form class="col-12 mx-auto needs-validation" method="POST" action="/editprofile" novalidate>
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <div class="row">
+                                <div class="col-12 my-2 pe-3">
+                                  <label for="validationDefaultUsername" class="form-label">Felhasználónév</label>
+                                  <div class="input-group">
+                                    <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend1" name="username" value="{{profile[3]}}">
+                                  </div>
+                                </div>
+                                <div class="col-12 my-2 pe-3">
+                                    <label for="validationDefaultEmail" class="form-label">Email</label>
+                                    <div class="input-group">
+                                      <input type="email" class="form-control" id="validationDefaultEmail" aria-describedby="inputGroupPrepend2" name="email" value="{{profile[2]}}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="row">
+                                <div class="col-12 my-2 ps-3">
+                                    <label for="validationDefaultOldPass" class="form-label">Régi jelszó:</label>
+                                    <div class="input-group d-flex">
+                                        <input type="password" class="form-control" id="validationDefaultOldPass" aria-describedby="inputGroupPrepend1" name="passold">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-eye" aria-hidden="true" id="togglepassword1"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 my-2 ps-3">
+                                    <label for="validationDefaultNewPass1" class="form-label">Új jelszó:</label>
+                                    <div class="input-group d-flex">
+                                        <input type="password" class="form-control" id="validationDefaultNewPass1" aria-describedby="inputGroupPrepend2" name="passnew1">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-eye" aria-hidden="true" id="togglepassword2"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 my-2 ps-3">
+                                    <label for="validationDefaultNewPass2" class="form-label">Új jelszó megerősítése:</label>
+                                    <div class="input-group d-flex">
+                                        <input type="password" class="form-control" id="validationDefaultNewPass2" aria-describedby="inputGroupPrepend2" name="passnew2">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-eye" aria-hidden="true" id="togglepassword3"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 my-5">
+                            <button class="btn btn-primary float-end" id="submitbutton">Mentés</button>
+                        </div>
+                    </div>
+                </form>  
+            </div>
+            <span class="lead">Fiók műveletek: </span>
+            <div class="row mb-5">
+                <form class="col-12 mx-auto needs-validation" method="POST" action="/deleteprofile" novalidate>
+                    <div class="row">
+                        <div class="col-12 my-2">
+                            <button class="btn btn-danger text-uppercase" id="submitbutton">Fiók és annak minden tartalmának törlése</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}
+</body>
+</html>
