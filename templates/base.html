@@ -51,9 +51,9 @@
             <div class="text-center row">
               <span class="my-auto">
                 {% if gender == "M" %}
-                  Üdv, {{ name }}! Férfi
+                  Üdv, <a href="/profile/{{ useridself }}">{{ name }}</a>! Férfi
                 {% else %}
-                  Üdv, {{ name }}! Nő
+                  Üdv, <a href="/profile/{{ useridself }}">{{ name }}</a>! Nő
                 {% endif %}
               </span>
             </div>

@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container">
-    {% if self %}
+    {% if selfuser %}
         <h3 class="text-center mt-5 text-uppercase">
             {{ profile[3] }} (Te)
             {% if profile[8] == 0 %}
@@ -24,7 +24,7 @@
         <p class="text-center mb-5">Utoljára bejelentkezett: {{ profile[7] }}</p>
     {% endif %}
 
-    {% if quizzescount != 0 %}
+    {% if quizzescount != False %}
     <div class="row mb-3">
         <div class="col-12 col-md-3">
             <h5>Quizek: </h5>
@@ -41,8 +41,8 @@
     </div>
     {% else %}
     <div class="row mb-3">
-        <div class="col-12 col-md-3">
-            {% if self %}
+        <div class="col-12 col-md-8">
+            {% if selfuser %}
                 <h5>Még nem készítettél quizeket.</h5>
             {% else %}
                 <h5>Még nem készített quizeket a felhasználó.</h5>
@@ -51,7 +51,7 @@
     </div>
     {% endif %}
 
-    {% if self %}
+    {% if selfuser %}
     <div class="row mb-3">
         <div class="col-12 col-md-3">
             <h5>Fiók kezelése: </h5>

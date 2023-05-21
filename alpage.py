@@ -6,10 +6,10 @@ def index():
 
     # If the session contains the loggedin variable, we can assume the user is logged in.
     if 'loggedin' in session:
-        userid = session['id']
-        username, gender = getUserData(userid)[0], getUserData(userid)[1]
+        useridself = session['id']
+        username, gender = getUserData(useridself)[0], getUserData(useridself)[1]
 
-        return render_template('home.html', title='QuizR - Főoldal', logged_in=True, home=True, name=username, gender=gender, description=description)
+        return render_template('home.html', title='QuizR - Főoldal', logged_in=True, home=True, name=username, gender=gender, useridself=useridself, description=description)
     else:
         return render_template('home.html', title='QuizR - Főoldal', logged_in=False, home=True, description=description)
     
@@ -19,10 +19,10 @@ def policy():
 
     # If the session contains the loggedin variable, we can assume the user is logged in.
     if 'loggedin' in session:
-        userid = session['id']
-        username, gender = getUserData(userid)[0], getUserData(userid)[1]
+        useridself = session['id']
+        username, gender = getUserData(useridself)[0], getUserData(useridself)[1]
 
-        return render_template('policy.html', title='QuizR - Adatkezelési tájékoztató', logged_in=True, name=username, gender=gender, description=description)
+        return render_template('policy.html', title='QuizR - Adatkezelési tájékoztató', logged_in=True, name=username, gender=gender, useridself=useridself, description=description)
     else:
         return render_template('policy.html', title='QuizR - Adatkezelési tájékoztató', logged_in=False, description=description)
     
@@ -32,9 +32,9 @@ def howtomakequiz():
 
     # If the session contains the loggedin variable, we can assume the user is logged in.
     if 'loggedin' in session:
-        userid = session['id']
-        username, gender = getUserData(userid)[0], getUserData(userid)[1]
+        useridself = session['id']
+        username, gender = getUserData(useridself)[0], getUserData(useridself)[1]
 
-        return render_template('howtomakequiz.html', title='QuizR - Quiz pakli készítés útmutató', logged_in=True, name=username, gender=gender, description=description)
+        return render_template('howtomakequiz.html', title='QuizR - Quiz pakli készítés útmutató', logged_in=True, name=username, gender=gender, useridself=useridself, description=description)
     else:
         return render_template('howtomakequiz.html', title='QuizR - Quiz pakli készítés útmutató', logged_in=False, description=description)

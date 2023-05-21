@@ -1,6 +1,6 @@
 from app import *
 
-def sendQuiz(quizz, username, gender):
+def sendQuiz(quizz, username, gender, useridself):
         descerror = "Valami hiba történt. A hiba leírása mellett megjelenik a hiba kódja is. A hiba kódját a fejlesztőknek kell elküldeniük, hogy javítsák a hibát vagy utánajárjanak a problémának."
         description = "Tanuld meg a kártyákat könnyebben. Nézd meg a megoldásokat, ha mégsem sikerülne. Majd próbáld meg ismét. A QuizR segít a tanulásban."
 
@@ -32,16 +32,16 @@ def sendQuiz(quizz, username, gender):
         cursor.close()
         cnx.close()
 
-        if username and gender is not None:
+        if username and gender and useridself is not None:
             # Handle errors
             if quizcategory is None:
                 flash('Hiba történt! 0x007')
-                return render_template('error.html', title='QuizR - Hiba történt', logged_in=True, name=username, gender=gender, description=descerror)
+                return render_template('error.html', title='QuizR - Hiba történt', logged_in=True, name=username, gender=gender, useridself=useridself, description=descerror)
             if len(quizcontents) == 0:
                 flash('Hiba történt! 0x009')
-                return render_template('error.html', title='QuizR - Hiba történt', logged_in=True, name=username, gender=gender, description=descerror)
+                return render_template('error.html', title='QuizR - Hiba történt', logged_in=True, name=username, gender=gender, useridself=useridself, description=descerror)
             
-            return render_template('quizes/learnquiz.html', title='QuizR - ' + quizcategory + ' - ' + quizz[2], logged_in=True, name=username, gender=gender, quiz=quizz, quizcategory=quizcategory, quizcontents=quizcontents, quizcreator=quizcreator, description=description)
+            return render_template('quizes/learnquiz.html', title='QuizR - ' + quizcategory + ' - ' + quizz[2], logged_in=True, name=username, gender=gender, useridself=useridself, quiz=quizz, quizcategory=quizcategory, quizcontents=quizcontents, quizcreator=quizcreator, description=description)
         else:
             # Handle errors
             if quizcategory is None:
@@ -59,9 +59,9 @@ def createquiz():
 
     # If the session contains the loggedin variable, we can assume the user is logged in.
     if 'loggedin' in session:
-        userid = session['id']
+        useridself = session['id']
 
-        username, gender = getUserData(userid)[0], getUserData(userid)[1]
+        username, gender = getUserData(useridself)[0], getUserData(useridself)[1]
 
         # Get categories list
         cnx = cnxpool.get_connection()
@@ -71,7 +71,7 @@ def createquiz():
         cursor.close()
         cnx.close()
 
-        return render_template('quizes/createquiz.html', title='QuizR - Új Quiz pakli készítése', logged_in=True, name=username, gender=gender, categories=categories, description=description)
+        return render_template('quizes/createquiz.html', title='QuizR - Új Quiz pakli készítése', logged_in=True, name=username, gender=gender, useridself=useridself, categories=categories, description=description)
     else:
         flash('Quiz pakli készítéséhez jelentkezz be vagy regisztrálj! 0x013')
         return redirect(url_for('login'))
@@ -140,15 +140,15 @@ def quiz(quizid):
     cnx.close()
 
     if 'loggedin' in session:
-        userid = session['id']
-        username, gender = getUserData(userid)[0], getUserData(userid)[1]
+        useridself = session['id']
+        username, gender = getUserData(useridself)[0], getUserData(useridself)[1]
 
     # If the quiz doesnt exist, return error
     if quiz is None:
         # If the user is logged in, return the error page with the logged in template
         if 'loggedin' in session:
             flash('A kért quiz nem található! 0x002')
-            return render_template('error.html', title='QuizR - Quiz nem található', logged_in=True, name=username, gender=gender, description=descerror)
+            return render_template('error.html', title='QuizR - Quiz nem található', logged_in=True, name=username, gender=gender, useridself=useridself, description=descerror)
         else:
             flash('A kért quiz nem található! 0x003')
             return render_template('error.html', title='QuizR - Quiz nem található', logged_in=False, description=descerror)
@@ -157,15 +157,15 @@ def quiz(quizid):
         if 'loggedin' in session:
             # If quiz is private
             if quiz[8] == 0:
-                if quiz[6] != userid:
+                if quiz[6] != useridself:
                     flash('A kért quiz nem nyilvános! 0x004')
-                    return render_template('error.html', title='QuizR - Quiz nem nyilvános', logged_in=True, name=username, gender=gender, description=descerror)
+                    return render_template('error.html', title='QuizR - Quiz nem nyilvános', logged_in=True, name=username, gender=gender, useridself=useridself, description=descerror)
                 else:
                     flash('A quized mások számára nem megtekinthető! 0x006')
-                    return sendQuiz(quiz, username, gender)
+                    return sendQuiz(quiz, username, gender, useridself)
             # If quiz is public
             else:
-                return sendQuiz(quiz, username, gender)
+                return sendQuiz(quiz, username, gender, useridself)
         # Not logged in
         else:
             # If quiz is private
@@ -174,5 +174,4 @@ def quiz(quizid):
                 return render_template('error.html', title='QuizR - Quiz nem nyilvános', logged_in=False, description=descerror)
             # If quiz is public
             else:
-                return sendQuiz(quiz, None, None)
-        
+                return sendQuiz(quiz, None, None, None)
