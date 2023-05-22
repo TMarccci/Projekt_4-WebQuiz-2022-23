@@ -51,9 +51,17 @@
             <div class="text-center row">
               <span class="my-auto">
                 {% if gender == "M" %}
-                  <div class="bubbleconbo mx-3 btn"><a class="text-dark me-2" href="/profile/{{ useridself }}">{{ name }}</a>   <img src="{{ url_for('static', filename='img/man.svg') }}" alt="man"></div>
+                  <div class="mx-3">
+                    <a class="text-dark me-2 bubbleconbo btn" href="/profile/{{ useridself }}">{{ name }} 
+                      <img src="{{ url_for('static', filename='img/man.svg') }}" alt="man">
+                    </a>
+                  </div>
                 {% else %}
-                  <div class="bubbleconbo mx-3 btn"><a class="text-dark me-2" href="/profile/{{ useridself }}">{{ name }}</a>   <img src="{{ url_for('static', filename='img/woman.svg') }}" alt="woman"></div>
+                  <div class="mx-3">
+                    <a class="text-dark me-2 bubbleconbo btn" href="/profile/{{ useridself }}">{{ name }}
+                      <img src="{{ url_for('static', filename='img/woman.svg') }}" alt="woman">
+                    </a>   
+                  </div>
                 {% endif %}
               </span>
             </div>
