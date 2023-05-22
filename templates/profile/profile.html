@@ -61,25 +61,41 @@
         <div class="col-12 col-md-8">
             <span class="lead">Adatok szerkesztése: </span>
             <div class="row mb-5">
-                <form class="col-12 mx-auto needs-validation" method="POST" action="/editprofile" novalidate>
+                <form class="col-12 col-md-6 mx-auto needs-validation" id="dataupdate" method="POST" action="/editprofile" novalidate>
                     <div class="row">
-                        <div class="col-12 col-md-6">
+                        <div class="col-12">
                             <div class="row">
                                 <div class="col-12 my-2 pe-3">
                                   <label for="validationDefaultUsername" class="form-label">Felhasználónév</label>
                                   <div class="input-group">
-                                    <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend1" name="username" value="{{profile[3]}}">
+                                    <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend1" name="username" value="{{profile[3]}}" required>
                                   </div>
                                 </div>
                                 <div class="col-12 my-2 pe-3">
                                     <label for="validationDefaultEmail" class="form-label">Email</label>
                                     <div class="input-group">
-                                      <input type="email" class="form-control" id="validationDefaultEmail" aria-describedby="inputGroupPrepend2" name="email" value="{{profile[2]}}">
+                                      <input type="email" class="form-control" id="validationDefaultEmail" aria-describedby="inputGroupPrepend2" name="email" value="{{profile[2]}}" required>
                                     </div>
                                 </div>
                             </div>
+                            {% with messages = get_flashed_messages() %}
+                                {% if messages[0] != "null" and messages %}
+                                    <div class="row">
+                                        <div class="col-12 col-md-8 mx-auto text-center alert alert-danger text-uppercase">
+                                            {{ messages[0] }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endwith %}
                         </div>
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 my-5">
+                            <button class="btn btn-primary" id="submitbuttondataupdate">Mentés</button>
+                        </div>
+                    </div>
+                </form>  
+                <form class="col-12 col-md-6 mx-auto needs-validation" id="pwupdate" method="POST" action="/updatepass" novalidate>
+                    <div class="row">
+                        <div class="col-12">
                             <div class="row">
                                 <div class="col-12 my-2 ps-3">
                                     <label for="validationDefaultOldPass" class="form-label">Régi jelszó:</label>
@@ -99,6 +115,28 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-12">
+                                    <div class="alert py-3 mb-0 d-none" role="alert" id="password-alert">
+                                        <ul class="list-unstyled mb-0">
+                                        <li class="requirements leng">
+                                            <i class="fas fa-check text-success me-2"></i>
+                                            <i class="fas fa-times text-danger me-3"></i>
+                                            Minimum 8 karakter</li>
+                                        <li class="requirements big-letter">
+                                            <i class="fas fa-check text-success me-2"></i>
+                                            <i class="fas fa-times text-danger me-3"></i>
+                                            Minimum 1 nagy betű</li>
+                                        <li class="requirements num">
+                                            <i class="fas fa-check text-success me-2"></i>
+                                            <i class="fas fa-times text-danger me-3"></i>
+                                            Minimum 1 szám</li>
+                                        <li class="requirements special-char">
+                                            <i class="fas fa-check text-success me-2"></i>
+                                            <i class="fas fa-times text-danger me-3"></i>
+                                            Minimum 1 speciális karakter</li>
+                                        </ul>
+                                    </div>
+                                </div>
                                 <div class="col-12 my-2 ps-3">
                                     <label for="validationDefaultNewPass2" class="form-label">Új jelszó megerősítése:</label>
                                     <div class="input-group d-flex">
@@ -109,19 +147,28 @@
                                     </div>
                                 </div>
                             </div>
+                            {% with messages = get_flashed_messages() %}
+                                {% if messages[1] != "null" and messages %}
+                                    <div class="row">
+                                        <div class="col-12 col-md-8 mx-auto text-center alert alert-danger text-uppercase">
+                                            {{ messages[1] }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endwith %}
                         </div>
                         <div class="col-12 my-5">
-                            <button class="btn btn-primary float-end" id="submitbutton">Mentés</button>
+                            <button class="btn btn-primary float-end" id="submitbuttonpwupdate">Frissítés</button>
                         </div>
                     </div>
-                </form>  
+                </form>
             </div>
             <span class="lead">Fiók műveletek: </span>
             <div class="row mb-5">
                 <form class="col-12 mx-auto needs-validation" method="POST" action="/deleteprofile" novalidate>
                     <div class="row">
                         <div class="col-12 my-2">
-                            <button class="btn btn-danger text-uppercase" id="submitbutton">Fiók és annak minden tartalmának törlése</button>
+                            <button class="btn btn-danger text-uppercase" id="submitbuttondelete">Fiók és annak minden tartalmának törlése</button>
                         </div>
                     </div>
                 </form>
@@ -131,7 +178,7 @@
     {% endif %}
 
 </div>
-
+<script src="{{ url_for('static', filename='js/profile/script.js') }}"></script>
 {% endblock %}
 </body>
 </html>

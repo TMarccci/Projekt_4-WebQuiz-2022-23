@@ -40,6 +40,7 @@ def getUserQuizzes(userid, self):
 
     return quizzes
 
+# Send profile page
 @app.route('/profile/<userid>')
 def profile(userid):
     description = "Itt megtekinthető a saját illetve más felhasználók profiljai. A saját profil esetén adatmódosításra is van lehetőség. Más profilnál pedig a nyilvános quiz paklikat lehet megtekinteni."
@@ -100,3 +101,4 @@ def profile(userid):
         else:
             flash('Nem található a felhasználó. 0x015')
             return render_template('error.html', title='QuizR - Quiz nem található', logged_in=False, description=descerror)
+        
