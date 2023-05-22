@@ -162,7 +162,7 @@ def editprofile():
         return redirect(url_for('profile', userid=useridself))
     
     # If something changed return page
-    flash('Sikeresen megváltoztattad a profilod adatait!')
+    flash('Sikeresen megváltoztattad az adataid!')
     flash('null')
     flash('null')
     return redirect(url_for('profile', userid=useridself))
