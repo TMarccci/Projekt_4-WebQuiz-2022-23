@@ -30,17 +30,17 @@
             <h5>Quizek: </h5>
         </div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-5 ps-3">
         {% for quiz in range(quizzescount) %}
-        <div class="col-12 col-md-4 col-md-3">
+        <div class="col-10 col-md-4 col-lg-2 p-3 mt-2 mb-3 mx-auto" style="border: 1px solid black; border-radius: 10px; box-shadow: 10px 10px 5px grey;">
+            <span class="px-2 py-1 float-end" style="border: 1px solid black; border-radius: 3px; box-shadow: 3px 3px 5px grey;">{{ quizzes[quiz][7] }}</span>
             <a href="/quiz/{{ quizzes[quiz][1] }}">{{ quizzes[quiz][2] }}</a>
             <p>{{ categnames[quiz] }}</p>
-            <p>{{ quizzes[quiz][7] }}</p>
         </div>
         {% endfor %}
     </div>
     {% else %}
-    <div class="row mb-3">
+    <div class="row mb-3 ps-3">
         <div class="col-12 col-md-8">
             {% if selfuser %}
                 <h5>Még nem készítettél quizeket.</h5>
@@ -52,7 +52,7 @@
     {% endif %}
 
     {% if selfuser %}
-    <div class="row mb-3">
+    <div class="row mb-5">
         <div class="col-12 col-md-3">
             <h5>Fiók kezelése: </h5>
         </div>
