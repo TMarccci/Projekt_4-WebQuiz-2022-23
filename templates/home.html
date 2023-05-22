@@ -2,10 +2,81 @@
 
 {% block content %}
 <div class="container-fluid">
-    <a href="{{ url_for('howtomakequiz') }}" class="btn text-uppercase">Hogyan kell készíteni</a>
-    <a href="{{ url_for('createquiz') }}" class="btn text-uppercase">Új quiz pakli készítése</a>
-    <a href="{{ url_for('policy') }}" class="btn text-uppercase">Adatkezelési tájékoztató</a>
+    <div class="container col-xxl-8 px-4 py-5">
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+          <div class="col-10 col-sm-8 col-lg-6">
+            <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+          </div>
+          <div class="col-lg-6">
+            <h1 class="display-1 fw-bold text-body-emphasis lh-1 mb-3 ">QuizR</h1>
+            <p class="lead">Tanuld meg a kártyákat könnyebben. Nézd meg a megoldásokat, ha mégsem sikerülne. Majd próbáld meg ismét. A QuizR segít a tanulásban.</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+              <button onclick="location.href='/register'" type="button" class="btn btn-lg px-4 me-md-2 gombszin">Vágj bele!</button>
+            </div>
+          </div>
+        </div>
+    </div>
+   
+    <div class="continer">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <hr>
+            </div>
+        </div>
+    </div>
+
+    <div class="px-4 py-5 my-5 text-center">
+        <h1 class="display-5 fw-bold text-body-emphasis">Mi az a flashcard?</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-5">A flashcard egy olyan kártya amit az emberek tanulásra használnak. Úgy működik hogy a kártya egyik oldalán van egy kérdés és a másik oldalán a válasz. A felhasználó elolvassa a kérdést és megpróbál válasszolni rá, ezután megfordítja a kártyát és leellenőrzi a válaszát. Ezzel segíti a gyors, élvezetesebb tanulást.</p>
+        </div>
+
+        <div class="row mt-5">
+            <div class="d-none d-lg-block col-lg-2"></div>
+            <div class="col-6 col-md-3 col-lg-2">
+                <img src="{{ url_for('static', filename='img/timesand.svg') }}" alt="time">
+                <p>Gyors tanulás</p>
+            </div>
+            <div class="col-6 col-md-3 col-lg-2">
+                <img src="{{ url_for('static', filename='img/check.svg') }}" alt="check">
+                <p>Könnyű tanulás</p>
+            </div>
+            <div class="col-6 col-md-3 col-lg-2">
+                <img src="{{ url_for('static', filename='img/create.svg') }}" alt="create">
+                <p>Új kártyák létrehozása <br> egyszerűenn</p>
+            </div>
+            <div class="col-6 col-md-3 col-lg-2">
+                <img src="{{ url_for('static', filename='img/laptop.svg') }}" alt="laptop">
+                <p>Könnyen elérhető digitális <br> tananyag</p>
+            </div>
+            <div class="d-none d-lg-block col-lg-2"></div>
+        </div>
+    </div>
+
+    <div class="continer">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <hr>
+            </div>
+        </div>
+    </div>
+
+    <div class="px-4 pt-5 my-5 text-center border-bottom">
+        <h1 class="display-4 fw-bold text-body-emphasis">Alkalmazas használata</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">Az alkalmazás használata gyors és egyszerű. Az oldal lehetővé teszi a felhasználók számára hogy saját kvíz paklikat készítsenek, és azokat megosszák másokkal. A QuizR egyben lehetőséget biztosít a felhasználók számára, hogy mások által készített kvíz paklikat tanuljanak, és teszteljék tudásukat.</p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+            <button onclick="location.href='howtomakequiz'" type="button" class="btn btn-lg px-4 me-sm-3  bubblebutton">Bővebben</button>
+          </div>
+        </div>
+        <div class="overflow-hidden" style="max-height: 30vh;">
+          <div class="container px-5">
+            <img src="{{ url_for('static', filename='img/kep.png') }}" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
+          </div>
+        </div>
+      </div>
 </div>
+
 {% endblock %}
 </body>
 </html>

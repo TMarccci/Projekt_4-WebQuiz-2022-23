@@ -35,13 +35,13 @@
       <div class="container-fluid">
         <div class="navbar-brand" style="margin-top: -2px;">
           <!-- Brand ide -->
-          <span>Q</span>
+          <span>QuizR</span>
         </div>
 
           {% if home != True %}
           <div class="me-auto">
             <!-- Ha a felhasználó nem a főoldalon van akkor mutatja a főoldal gombot. -->
-              <a href="{{ url_for('index') }}" class="nav-link" aria-current="page">Főoldal</a>
+              <div id="homebutton"><a href="{{ url_for('index') }}" class="nav-link" aria-current="page">Főoldal</a></div>
           </div>
           {% endif %}
 
@@ -51,14 +51,14 @@
             <div class="text-center row">
               <span class="my-auto">
                 {% if gender == "M" %}
-                  Üdv, <a href="/profile/{{ useridself }}">{{ name }}</a>! Férfi
+                  <div class="bubbleconbo mx-3 btn"><a class="text-dark me-2" href="/profile/{{ useridself }}">{{ name }}</a>   <img src="{{ url_for('static', filename='img/man.svg') }}" alt="man"></div>
                 {% else %}
-                  Üdv, <a href="/profile/{{ useridself }}">{{ name }}</a>! Nő
+                  <div class="bubbleconbo mx-3 btn"><a class="text-dark me-2" href="/profile/{{ useridself }}">{{ name }}</a>   <img src="{{ url_for('static', filename='img/woman.svg') }}" alt="woman"></div>
                 {% endif %}
               </span>
             </div>
             <div class="d-flex me-2 text-center">
-                <a href="/logout" class="nav-link mx-2" aria-current="page">Kijelentkezés</a>
+                <div class="bubblebutton btn"><a href="/logout" class="nav-link mx-2" aria-current="page">Kijelentkezés</a></div>
             </div>
           </div>
 
@@ -68,14 +68,14 @@
           <div class="d-flex me-2 text-center">
             {% if reg %}
               <!-- A felhasználó a regisztráció oldalon van -->
-                <a href="/login" class="nav-link me-3" aria-current="page">Bejelentkezés</a>
+                <div class="bubblebutton me-3 btn"><a href="/login" class="nav-link " aria-current="page">Bejelentkezés</a></div>
             {% elif reg == False %}
               <!-- A felhasználó a bejelentkezés oldalon van -->
-                <a href="/register" class="nav-link me-3" aria-current="page">Regisztráció</a>
+                <div class="bubblebutton me-3 btn"><a href="/register" class="nav-link " aria-current="page">Regisztráció</a></div>
             {% else %}
               <!-- A felhasználó a egyik bejelentkező oldalon sincs (Főoldal, Vagy aloldalak) -->
-                <a href="/register" class="nav-link me-3" aria-current="page">Regisztráció</a>
-                <a href="/login" class="nav-link me-3" aria-current="page">Bejelentkezés</a>
+                <div class="bubblebutton me-3 btn"><a href="/register" class="nav-link " aria-current="page">Regisztráció</a></div>
+                <div class="bubblebutton me-3 btn"><a href="/login" class="nav-link " aria-current="page">Bejelentkezés</a></div>
             {% endif %}
           </div>
           
@@ -85,11 +85,11 @@
     <main class="container-fluid">
         {% block content %} {% endblock %}
     </main>
-    <footer>
+    <footer class="py-2">
       <div class="container-fluid">
         <div class="row">
           <div class="col-12 text-center">
-            <p>QuizR &copy; 2023</p>
+            <p class="m-0">QuizR &copy; 2023</p>
           </div>
         </div>
       </div>
