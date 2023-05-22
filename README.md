@@ -26,6 +26,10 @@
 - 0x013 - Új pakli készítéséhez be kell jelentkezni
 - 0x014 - Nem található a felhasználó, felhasználó be van jelentkezve
 - 0x015 - Nem található a felhasználó, felhasználó nincs bejelentkezve
+- 0x016 - A kívánt email cím már használatban van! Nem történt változtatás. (Profil adatmódosítás)
+- 0x017 - Nem változtattál meg semmit! (Profil adatmódosítás)
+- 0x018 - A két új jelszó nem egyezik meg! (Profil adatmódosítás)
+- 0x019 - A régi jelszó nem egyezik meg a megadottal! Nem történt változtatás. (Profil adatmódosítás)
 
 ## Leírások
 - Főoldal: A QuizR egy webes alkalmazás, amely lehetővé teszi a felhasználók számára, hogy saját kvíz paklikat készítsenek, és azokat megosszák másokkal. A QuizR egyben lehetőséget biztosít a felhasználók számára, hogy mások által készített kvíz paklikat tanuljanak, és teszteljék tudásukat.

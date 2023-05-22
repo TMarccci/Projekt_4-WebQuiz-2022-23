@@ -60,6 +60,15 @@
     <div class="row mb-3 ps-3">
         <div class="col-12 col-md-8">
             <span class="lead">Adatok szerkesztése: </span>
+            {% with messages = get_flashed_messages() %}
+                {% if messages[0] != "null" and messages %}
+                    <div class="row my-5">
+                        <div class="col-12 col-md-8 mx-auto text-center alert alert-success">
+                            {{ messages[0] }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endwith %}
             <div class="row mb-5">
                 <form class="col-12 col-md-6 mx-auto needs-validation" id="dataupdate" method="POST" action="/editprofile" novalidate>
                     <div class="row">
@@ -79,10 +88,10 @@
                                 </div>
                             </div>
                             {% with messages = get_flashed_messages() %}
-                                {% if messages[0] != "null" and messages %}
-                                    <div class="row">
+                                {% if messages[1] != "null" and messages %}
+                                    <div class="row my-3">
                                         <div class="col-12 col-md-8 mx-auto text-center alert alert-danger text-uppercase">
-                                            {{ messages[0] }}
+                                            {{ messages[1] }}
                                         </div>
                                     </div>
                                 {% endif %}
@@ -148,10 +157,10 @@
                                 </div>
                             </div>
                             {% with messages = get_flashed_messages() %}
-                                {% if messages[1] != "null" and messages %}
-                                    <div class="row">
+                                {% if messages[2] != "null" and messages %}
+                                    <div class="row my-3">
                                         <div class="col-12 col-md-8 mx-auto text-center alert alert-danger text-uppercase">
-                                            {{ messages[1] }}
+                                            {{ messages[2] }}
                                         </div>
                                     </div>
                                 {% endif %}
