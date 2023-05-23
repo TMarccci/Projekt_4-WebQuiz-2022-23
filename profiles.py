@@ -440,7 +440,7 @@ def quizshowinsearch():
         flash('null')
         flash('null')
         flash('null')
-        flash('Hiba történt a megjelenítés alatt! 0x023')
+        flash('Hiba történt a keresésben való megjelenítés alatt! 0x023')
         return redirect(url_for('profile', userid=userid))
     
 # API for quiz to not appear in search
@@ -480,5 +480,5 @@ def quizhideinsearch():
         flash('null')
         flash('null')
         flash('null')
-        flash('Hiba történt a megjelenítés alatt! 0x024')
+        flash('Hiba történt a keresésben való elrejtés alatt! 0x024')
         return redirect(url_for('profile', userid=userid))

@@ -30,7 +30,11 @@
 - 0x017 - Nem változtattál meg semmit! (Profil adatmódosítás)
 - 0x018 - A két új jelszó nem egyezik meg! (Profil adatmódosítás)
 - 0x019 - A régi jelszó nem egyezik meg a megadottal! Nem történt változtatás. (Profil adatmódosítás)
-- 0x020 - Hiba történt a törlés alatt! (Quiz Pakli törlése)
+- 0x020 - Hiba történt a törlés alatt! (Quiz Pakli)
+- 0x021 - Hiba történt a publikussá tétel alatt! (Quiz Pakli)
+- 0x022 - Hiba történt a priváttá tétel alatt! (Quiz Pakli)
+- 0x023 - Hiba történt a keresésben való megjelenítés alatt! (Quiz Pakli)
+- 0x024 - Hiba történt a keresésben való elrejtés alatt! (Quiz Pakli)
 
 ## Leírások
 - Főoldal: A QuizR egy webes alkalmazás, amely lehetővé teszi a felhasználók számára, hogy saját kvíz paklikat készítsenek, és azokat megosszák másokkal. A QuizR egyben lehetőséget biztosít a felhasználók számára, hogy mások által készített kvíz paklikat tanuljanak, és teszteljék tudásukat.
@@ -42,7 +46,3 @@
 - Quiz: Tanuld meg a kártyákat könnyebben. Nézd meg a megoldásokat, ha mégsem sikerülne. Majd próbáld meg ismét. A QuizR segít a tanulásban.
 - Profil: Itt megtekinthető a saját illetve más felhasználók profiljai. A saját profil esetén adatmódosításra is van lehetőség. Más profilnál pedig a nyilvános quiz paklikat lehet megtekinteni.
 - Hiba: Valami hiba történt. A hiba leírása mellett megjelenik a hiba kódja is. A hiba kódját a fejlesztőknek kell elküldeniük, hogy javítsák a hibát vagy utánajárjanak a problémának.
-
-## CSS Szabadon használható osztályok formázáshoz
-- .quizcard - Quiz kártya 
-- .flipbtn - Quiz kártya fordítás gomb
