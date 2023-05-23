@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
     {% if selfuser %}
-        <h3 class="text-center mt-5 text-uppercase">
+        <h3 class="text-center mt-5 text-uppercase fw-bold">
             {{ profile[3] }} (Te)
             {% if profile[8] == 0 %}
                 <img src="{{ url_for('static', filename='img/man.svg') }}" alt="man" class="img-fluid">
@@ -11,9 +11,10 @@
                 <img src="{{ url_for('static', filename='img/woman.svg') }}" alt="woman" class="img-fluid">
             {% endif %}
         </h3>
-        <p class="text-center mb-5">Utoljára bejelentkeztél: {{ profile[7] }}</p>
+        <p class="text-center mb-1">Utoljára bejelentkeztél: {{ profile[7] }}</p>
+        <p class="text-center mb-5">Azonosítód: <span id="useridentifierself" class="fw-bold">{{ profile[1] }}</span></p>
     {% else %}
-        <h3 class="text-center mt-5 text-uppercase">
+        <h3 class="text-center mt-5 text-uppercase fw-bold">
             {{ profile[3] }}
             {% if profile[8] == 0 %}
                 <img src="{{ url_for('static', filename='img/man.svg') }}" alt="man" class="img-fluid">
@@ -24,24 +25,49 @@
         <p class="text-center mb-5">Utoljára bejelentkezett: {{ profile[7] }}</p>
     {% endif %}
 
-    {% if quizzescount != False %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages[3] != "null" and messages %}
+            <div class="row my-5">
+                <div class="col-12 col-md-8 mx-auto text-center alert alert-success">
+                    {{ messages[3] }}
+                </div>
+            </div>
+        {% endif %}
+        {% if messages[4] != "null" and messages %}
+            <div class="row my-5">
+                <div class="col-12 col-md-8 mx-auto text-center alert alert-danger text-uppercase">
+                    {{ messages[4] }}
+                </div>
+            </div>
+        {% endif %}
+    {% endwith %}
+
     <div class="row mb-3">
         <div class="col-12 col-md-3">
             <h5>Quizek: </h5>
         </div>
     </div>
+    {% if quizzescount != False %}
     <div class="row mb-5 ps-3">
         {% for quiz in range(quizzescount) %}
-        <div class="col-10 col-md-4 col-lg-2 p-3 mt-2 mb-3 mx-auto" style="border: 1px solid black; border-radius: 10px; box-shadow: 10px 10px 5px grey;">
-            <a onclick="">
-                <span class="px-2 py-1 float-end ms-2" style="background-color: #dc3545; border-radius: 3px; box-shadow: 3px 3px 5px grey;">
-                    <i class="fa fa-trash" aria-hidden="true" style="color: white;"></i>
-                </span>
-            </a>
-            <span class="px-2 py-1 float-end ms-1" style="border: 1px solid black; border-radius: 3px; box-shadow: 3px 3px 5px grey;">{{ quizzes[quiz][7] }}</span>
-
-            <a href="/quiz/{{ quizzes[quiz][1] }}">{{ quizzes[quiz][2] }}</a>
-            <p>{{ categnames[quiz] }}</p>
+        <div class="col-12 col-md-6 col-lg-4 my-3">
+            <div class="card" style="border: 1px solid black; border-radius: 10px; box-shadow: 10px 10px 5px grey;">
+                <div class="card-body">
+                    {% if selfuser %}
+                        <form method="post" action="/deletequiz" id="delete{{ quiz }}">
+                            <input type="hidden" name="quizid" value="{{ quizzes[quiz][1] }}">
+                            <a href="#" onclick="document.getElementById('delete{{ quiz }}').submit()">
+                                <span class="px-2 py-1 float-end ms-2" style="background-color: #dc3545; border-radius: 3px; box-shadow: 3px 3px 5px grey; cursor: pointer">
+                                    <i class="fa fa-trash" aria-hidden="true" style="color: white;"></i>
+                                </span>
+                            </a>
+                        </form>
+                    {% endif %}
+                    <span class="px-2 py-1 float-end ms-1" style="border: 1px solid black; border-radius: 3px; box-shadow: 3px 3px 5px grey;">{{ quizzes[quiz][7] }}</span>
+                    <a href="/quiz/{{ quizzes[quiz][1] }}">{{ quizzes[quiz][2] }}</a>
+                    <p>{{ categnames[quiz] }}</p>
+                </div>
+            </div>
         </div>
         {% endfor %}
     </div>
@@ -180,10 +206,10 @@
             </div>
             <span class="lead">Fiók műveletek: </span>
             <div class="row mb-5">
-                <form class="col-12 mx-auto needs-validation" method="POST" action="/deleteprofile" novalidate>
+                <form class="col-12 mx-auto" method="POST" action="/deleteprofile" novalidate>
                     <div class="row">
                         <div class="col-12 my-2">
-                            <button class="btn btn-danger text-uppercase" id="submitbuttondelete">Fiók és annak minden tartalmának törlése</button>
+                            <button type="submit" class="btn btn-danger text-uppercase" id="submitbuttondelete">Fiók és annak minden tartalmának törlése</button>
                         </div>
                     </div>
                 </form>

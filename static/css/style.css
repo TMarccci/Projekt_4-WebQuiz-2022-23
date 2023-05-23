@@ -177,5 +177,5 @@ footer {
 /* Content height */
 
 .tartalom {
-  min-height: calc(100vh - 28.9vh);
+  min-height: calc(100vh - 28.9vh);   
 }

@@ -30,6 +30,7 @@
 - 0x017 - Nem változtattál meg semmit! (Profil adatmódosítás)
 - 0x018 - A két új jelszó nem egyezik meg! (Profil adatmódosítás)
 - 0x019 - A régi jelszó nem egyezik meg a megadottal! Nem történt változtatás. (Profil adatmódosítás)
+- 0x020 - Hiba történt a törlés alatt! (Quiz Pakli törlése)
 
 ## Leírások
 - Főoldal: A QuizR egy webes alkalmazás, amely lehetővé teszi a felhasználók számára, hogy saját kvíz paklikat készítsenek, és azokat megosszák másokkal. A QuizR egyben lehetőséget biztosít a felhasználók számára, hogy mások által készített kvíz paklikat tanuljanak, és teszteljék tudásukat.

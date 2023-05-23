@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash, Response
+from flask import Flask, render_template, request, redirect, url_for, session, flash, Response, jsonify
 from dotenv import load_dotenv
-import mysql.connector.pooling, os, uuid
+import mysql.connector.pooling, os, uuid, json
 
 load_dotenv()
 app = Flask(__name__)

@@ -152,6 +152,8 @@ def editprofile():
             flash('null')
             flash('A kívánt email cím már használatban van! Nem történt változtatás. 0x016')
             flash('null')
+            flash('null')
+            flash('null')
             return redirect(url_for('profile', userid=useridself))
         
     # If nothing changed return nothing changed
@@ -159,10 +161,14 @@ def editprofile():
         flash('null')
         flash('Nem változtattál meg semmit! 0x017')
         flash('null')
+        flash('null')
+        flash('null')
         return redirect(url_for('profile', userid=useridself))
     
     # If something changed return page
     flash('Sikeresen megváltoztattad az adataid!')
+    flash('null')
+    flash('null')
     flash('null')
     flash('null')
     return redirect(url_for('profile', userid=useridself))
@@ -199,14 +205,112 @@ def updatepass():
             flash('Sikeresen megváltoztattad a jelszavad!')
             flash('null')
             flash('null')
+            flash('null')
+            flash('null')
             return redirect(url_for('profile', userid=useridself))
         else:
             flash('null')
             flash('null')
             flash('A két új jelszó nem egyezik meg! 0x018')
+            flash('null')
+            flash('null')
             return redirect(url_for('profile', userid=useridself))
     else:
         flash('null')
         flash('null')
         flash('A régi jelszó nem egyezik meg a megadottal! Nem történt változtatás. 0x019')
+        flash('null')
+        flash('null')
         return redirect(url_for('profile', userid=useridself))
+    
+# API for delete quiz modal
+@app.route('/deletequiz', methods=['POST'])
+def deletequiz():
+    # Parse data from the form
+    userid = session['id']
+    quizid = request.form['quizid']
+
+    # Check if the quiz belongs to the user
+    cnx = cnxpool.get_connection()
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM quizlist WHERE quizid = %s AND ownerid = %s", (quizid, userid))
+    quiz = cursor.fetchone()
+    cursor.close()
+    cnx.close()
+
+    # If the quiz belongs to the user
+    if quiz:
+        # Delete the quiz
+        # Delete quiz contents
+        cnx = cnxpool.get_connection()
+        cursor = cnx.cursor()
+        cursor.execute("DELETE FROM quizcontents WHERE quizid = %s", (quizid,))
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+
+        # Delete quiz
+        cnx = cnxpool.get_connection()
+        cursor = cnx.cursor()
+        cursor.execute("DELETE FROM quizlist WHERE quizid = %s", (quizid,))
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+
+        # Back to profile
+        flash('null')
+        flash('null')
+        flash('null')
+        flash('Sikeresen törölted a kvízt!')
+        flash('null')
+        return redirect(url_for('profile', userid=userid))
+    else:
+        flash('null')
+        flash('null')
+        flash('null')
+        flash('null')
+        flash('Hiba történt a törlés alatt! 0x020')
+        return redirect(url_for('profile', userid=userid))
+    
+# API for account deletion
+@app.route('/deleteprofile', methods=['POST'])
+def deleteprofile():
+    # Get the users data
+    useridself = session['id']
+
+    # Delete the user
+    # Get quiz ids
+    cnx = cnxpool.get_connection()
+    cursor = cnx.cursor()
+    cursor.execute("SELECT quizid FROM quizlist WHERE ownerid = %s", (useridself,))
+    quizids = cursor.fetchall()
+    cursor.close()
+    cnx.close()
+
+    # Delete quiz contents
+    for quizid in quizids:
+        cnx = cnxpool.get_connection()
+        cursor = cnx.cursor()
+        cursor.execute("DELETE FROM quizcontents WHERE quizid = %s", (quizid[0],))
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+
+    # Delete quizzes
+    cnx = cnxpool.get_connection()
+    cursor = cnx.cursor()
+    cursor.execute("DELETE FROM quizlist WHERE ownerid = %s", (useridself,))
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+
+    # Delete user
+    cnx = cnxpool.get_connection()
+    cursor = cnx.cursor()
+    cursor.execute("DELETE FROM users WHERE userid = %s", (useridself,))
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+
+    # Return to logout
+    return redirect(url_for('logout'))
