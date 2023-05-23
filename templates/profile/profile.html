@@ -51,21 +51,64 @@
     <div class="row mb-5 ps-3">
         {% for quiz in range(quizzescount) %}
         <div class="col-12 col-md-6 col-lg-4 my-3">
-            <div class="card" style="border: 1px solid black; border-radius: 10px; box-shadow: 10px 10px 5px grey;">
+            <div class="card">
                 <div class="card-body">
+                    <span class="px-2 py-1 float-end ms-2 cardscontroller">{{ quizzes[quiz][7] }}</span>
                     {% if selfuser %}
                         <form method="post" action="/deletequiz" id="delete{{ quiz }}">
                             <input type="hidden" name="quizid" value="{{ quizzes[quiz][1] }}">
                             <a href="#" onclick="document.getElementById('delete{{ quiz }}').submit()">
-                                <span class="px-2 py-1 float-end ms-2" style="background-color: #dc3545; border-radius: 3px; box-shadow: 3px 3px 5px grey; cursor: pointer">
+                                <span class="px-2 py-1 float-end ms-2 trash">
                                     <i class="fa fa-trash" aria-hidden="true" style="color: white;"></i>
                                 </span>
                             </a>
                         </form>
+                        <span class="px-2 py-1 float-end ms-2" style="margin-top: 2px">
+                            {% if quizzes[quiz][8] == 0 %}
+                                <div class="controllerparents">
+                                    <form action="/quiztopublic" id="quiztopublic{{ quiz }}" method="post">
+                                        <input type="hidden" name="quizid" value="{{ quizzes[quiz][1] }}">
+                                        <a href="#" onclick="document.getElementById('quiztopublic{{ quiz }}').submit()">
+                                            <img src="{{ url_for('static', filename='img/lock.svg') }}" alt="Lock" class="controllericons">
+                                        </a>
+                                    </form>
+                                </div>
+                            {% else %}
+                                <div class="d-flex">
+                                    <div class="mx-3 controllerparents">
+                                        <form action="/quiztoprivate" id="quiztoprivate{{ quiz }}" method="post">
+                                            <input type="hidden" name="quizid" value="{{ quizzes[quiz][1] }}">
+                                            <a href="#" onclick="document.getElementById('quiztoprivate{{ quiz }}').submit()">
+                                                <img src="{{ url_for('static', filename='img/globe.svg') }}" alt="Unlock" class="controllericons">
+                                            </a>
+                                        </form>
+                                    </div>
+                                    {% if quizzes[quiz][9] == 0 %}
+                                        <div class="controllerparents">
+                                            <form action="/quizshowinsearch" id="quizshowinsearch{{ quiz }}" method="post">
+                                                <input type="hidden" name="quizid" value="{{ quizzes[quiz][1] }}">
+                                                <a href="#" onclick="document.getElementById('quizshowinsearch{{ quiz }}').submit()">
+                                                    <img src="{{ url_for('static', filename='img/nomagn.svg') }}" alt="NoMagnifier" class="controllericons">
+                                                </a>
+                                            </form>
+                                        </div>
+                                    {% else %}
+                                        <div class="controllerparents">
+                                            <form action="/quizhideinsearch" id="quizhideinsearch{{ quiz }}" method="post">
+                                                <input type="hidden" name="quizid" value="{{ quizzes[quiz][1] }}">
+                                                <a href="#" onclick="document.getElementById('quizhideinsearch{{ quiz }}').submit()">
+                                                    <img src="{{ url_for('static', filename='img/magnifier.svg') }}" alt="Magnifier" class="controllericons">
+                                                </a>
+                                            </form>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </span>
                     {% endif %}
-                    <span class="px-2 py-1 float-end ms-1" style="border: 1px solid black; border-radius: 3px; box-shadow: 3px 3px 5px grey;">{{ quizzes[quiz][7] }}</span>
                     <a href="/quiz/{{ quizzes[quiz][1] }}">{{ quizzes[quiz][2] }}</a>
                     <p>{{ categnames[quiz] }}</p>
+                    
                 </div>
             </div>
         </div>

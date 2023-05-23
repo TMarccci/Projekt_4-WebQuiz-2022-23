@@ -177,5 +177,34 @@ footer {
 /* Content height */
 
 .tartalom {
-  min-height: calc(100vh - 28.9vh);   
+  min-height: calc(100vh - 28.9vh);
+}
+
+/* Card */
+
+.card {
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 10px 10px 5px grey;
+}
+
+.cardscontroller {
+  border: 1px solid black;
+  border-radius: 3px;
+  box-shadow: 3px 3px 5px grey;
+}
+
+.trash {
+  background-color: #dc3545;
+  border-radius: 3px;
+  box-shadow: 3px 3px 5px grey;
+  cursor: pointer;
+}
+
+.controllerparents {
+  cursor: pointer;
+}
+
+.controllericons {
+  display: block; width: 20px; height: 20px
 }

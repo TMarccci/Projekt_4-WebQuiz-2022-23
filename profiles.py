@@ -314,3 +314,171 @@ def deleteprofile():
 
     # Return to logout
     return redirect(url_for('logout'))
+
+# API for quiz to public
+@app.route('/quiztopublic', methods=['POST'])
+def quiztopublic():
+    # Parse data from the form
+    userid = session['id']
+    quizid = request.form['quizid']
+
+    # Check if the quiz belongs to the user
+    cnx = cnxpool.get_connection()
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM quizlist WHERE quizid = %s AND ownerid = %s", (quizid, userid))
+    quiz = cursor.fetchone()
+    cursor.close()
+    cnx.close()
+
+    # If the quiz belongs to the user
+    if quiz:
+        # Set the quiz to public
+        cnx = cnxpool.get_connection()
+        cursor = cnx.cursor()
+        cursor.execute("UPDATE quizlist SET ispublic = 1 WHERE quizid = %s", (quizid,))
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+
+        # Back to profile
+        flash('null')
+        flash('null')
+        flash('null')
+        flash('Sikeresen publikussá tetted a kvízt!')
+        flash('null')
+        return redirect(url_for('profile', userid=userid))
+    else:
+        flash('null')
+        flash('null')
+        flash('null')
+        flash('null')
+        flash('Hiba történt a publikussá tétel alatt! 0x021')
+        return redirect(url_for('profile', userid=userid))
+    
+# API for quiz to private
+@app.route('/quiztoprivate', methods=['POST'])
+def quiztoprivate():
+    # Parse data from the form
+    userid = session['id']
+    quizid = request.form['quizid']
+
+    # Check if the quiz belongs to the user
+    cnx = cnxpool.get_connection()
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM quizlist WHERE quizid = %s AND ownerid = %s", (quizid, userid))
+    quiz = cursor.fetchone()
+    cursor.close()
+    cnx.close()
+
+    # If the quiz belongs to the user
+    if quiz:
+        # Set the quiz to private
+        cnx = cnxpool.get_connection()
+        cursor = cnx.cursor()
+        cursor.execute("UPDATE quizlist SET ispublic = 0 WHERE quizid = %s", (quizid,))
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+
+        # Set the quiz dont appear in search 
+        cnx = cnxpool.get_connection()
+        cursor = cnx.cursor()
+        cursor.execute("UPDATE quizlist SET appearonsearch = 0 WHERE quizid = %s", (quizid,))
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+
+        # Back to profile
+        flash('null')
+        flash('null')
+        flash('null')
+        flash('Sikeresen priváttá tetted a kvízt!')
+        flash('null')
+        return redirect(url_for('profile', userid=userid))
+    else:
+        flash('null')
+        flash('null')
+        flash('null')
+        flash('null')
+        flash('Hiba történt a priváttá tétel alatt! 0x022')
+        return redirect(url_for('profile', userid=userid))
+    
+# API for quiz to appear in search
+@app.route('/quizshowinsearch', methods=['POST'])
+def quizshowinsearch():
+    # Parse data from the form
+    userid = session['id']
+    quizid = request.form['quizid']
+
+    # Check if the quiz belongs to the user
+    cnx = cnxpool.get_connection()
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM quizlist WHERE quizid = %s AND ownerid = %s", (quizid, userid))
+    quiz = cursor.fetchone()
+    cursor.close()
+    cnx.close()
+
+    # If the quiz belongs to the user
+    if quiz:
+        # Set the quiz to appear in search
+        cnx = cnxpool.get_connection()
+        cursor = cnx.cursor()
+        cursor.execute("UPDATE quizlist SET appearonsearch = 1 WHERE quizid = %s", (quizid,))
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+
+        # Back to profile
+        flash('null')
+        flash('null')
+        flash('null')
+        flash('Sikeresen megjeleníted a kvízt a keresésekben!')
+        flash('null')
+        return redirect(url_for('profile', userid=userid))
+    else:
+        flash('null')
+        flash('null')
+        flash('null')
+        flash('null')
+        flash('Hiba történt a megjelenítés alatt! 0x023')
+        return redirect(url_for('profile', userid=userid))
+    
+# API for quiz to not appear in search
+@app.route('/quizhideinsearch', methods=['POST'])
+def quizhideinsearch():
+    # Parse data from the form
+    userid = session['id']
+    quizid = request.form['quizid']
+
+    # Check if the quiz belongs to the user
+    cnx = cnxpool.get_connection()
+    cursor = cnx.cursor()
+    cursor.execute("SELECT * FROM quizlist WHERE quizid = %s AND ownerid = %s", (quizid, userid))
+    quiz = cursor.fetchone()
+    cursor.close()
+    cnx.close()
+
+    # If the quiz belongs to the user
+    if quiz:
+        # Set the quiz to not appear in search
+        cnx = cnxpool.get_connection()
+        cursor = cnx.cursor()
+        cursor.execute("UPDATE quizlist SET appearonsearch = 0 WHERE quizid = %s", (quizid,))
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+
+        # Back to profile
+        flash('null')
+        flash('null')
+        flash('null')
+        flash('Sikeresen eltüntetted a kvízt a keresésekből!')
+        flash('null')
+        return redirect(url_for('profile', userid=userid))
+    else:
+        flash('null')
+        flash('null')
+        flash('null')
+        flash('null')
+        flash('Hiba történt a megjelenítés alatt! 0x024')
+        return redirect(url_for('profile', userid=userid))
