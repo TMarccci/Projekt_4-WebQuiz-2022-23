@@ -45,6 +45,3 @@
 ## CSS Szabadon használható osztályok formázáshoz
 - .quizcard - Quiz kártya 
 - .flipbtn - Quiz kártya fordítás gomb
-
-## To do
-- Telefonon a főoldalon levő gomb nyomásra rossz színre vált

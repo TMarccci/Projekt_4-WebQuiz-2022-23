@@ -1,109 +1,181 @@
 * {
-    --color1: #75A8AC;
-    --color2: #98D0D4;
-    --color3: #4B878B;
-    --color4: #3e6d70;
-    --color5: #93c4c9;
-    --color6: rgb(231, 231, 231);
-    --color7: #2d4f52;
+  --color1: #75a8ac;
+  --color2: #98d0d4;
+  --color2-5: #7fb3b7;
+  --color3: #4b878b;
+  --color3-5: #3e6d70;
+  --color4: #3e6d70;
+  --color5: #93c4c9;
+  --color6: #e7e7e7;
+  --color6-5: #d1d1d1;
+  --color7: #2d4f52;
 }
 
-.wrong .fa-check
-{
-    display: none;
+.wrong .fa-check {
+  display: none;
 }
 
-.good .fa-times
-{
-    display: none;
+.good .fa-times {
+  display: none;
 }
 
-.quizcard
-{
-    min-height: 25vh;
+.quizcard {
+  min-height: 25vh;
 }
 
-.cardimg
-{
-    max-height: 24vh;
+.cardimg {
+  max-height: 24vh;
 }
 
 #cardsholder {
-    border: 0.3px solid gray;
-    border-radius: 10px;
+  border: 0.3px solid gray;
+  border-radius: 10px;
 }
 
-.navbar{
-    background-color: var(--color1);
+.navbar {
+  background-color: var(--color1);
 }
 
-.bubblebutton{
-    background-color: var(--color2);
-    
-    border-radius: 10px;
-    text-align: center;
-    padding: 5px;
+/* Text-Dec none on anchors */
+
+a {
+  text-decoration: none;
 }
 
-.bubblebutton:hover{
-    background-color: var(--color5);
+/* Primary Gomb szín változtatás, NavbarButton */
+
+.btn.btn-primary,
+.navbarbuttonself {
+  color: #fff;
+  background-color: var(--color3);
+  border-color: var(--color3);
 }
 
-a{
-    text-decoration: none;
+.btn.btn-primary:hover,
+.navbarbuttonself:hover {
+  color: #fff;
+  background-color: var(--color3-5);
+  border-color: var(--color3-5);
+  outline: none;
+  box-shadow: none;
 }
 
-.bubbleconbo{
-    background-color: white;
-    border-radius: 10px;
-    text-align: center;
-    padding: 5px;
-}
-.bubbleconbo:hover{
-    background-color: var(--color6);
-}
-
-#homebutton{
-    background-color: var(--color3);
-    color: white;
-    border-radius: 10px;
-    text-align: center;
-    padding: 5px;
-}
-
-#homebutton:hover{
-    background-color: var(--color4);
+.btn.btn-primary.active.focus,
+.btn.btn-primary.active:focus,
+.btn.btn-primary.active:hover,
+.btn.btn-primary:active.focus,
+.btn.btn-primary:active:focus,
+.btn.btn-primary:active:hover,
+.navbarbuttonself.active.focus,
+.navbarbuttonself.active:focus,
+.navbarbuttonself.active:hover,
+.navbarbuttonself:active.focus,
+.navbarbuttonself:active:focus,
+.navbarbuttonself:active:hover {
+  color: #fff;
+  background-color: var(--color4);
+  border-color: var(--color4);
+  outline: none;
+  box-shadow: none;
 }
 
-.gombszin{
-    background-color: var(--color3);
-    border: none;
+/* Navbar button padding, margin */
+
+.navbarbuttonself {
+  padding: 5px;
 }
 
-.gombszin:hover, .gombszin:focus, .gombszin:active, .gombszin:checked{
-    background-color: var(--color4);
+/* Register, Login, Logout Buttons eg. with bubblebutton */
+
+.bubblebutton {
+  background-color: var(--color2);
+  border-radius: 10px;
+  padding: 7px 10px;
 }
 
-
-hr{
-    color: var(--color3);
-    border: solid 2px var(--color4);
-    border-radius: 10px;
+.bubblebutton:hover {
+  background-color: var(--color5);
 }
 
-::-webkit-scrollbar{
-    width: 10px;
+.bubblebutton:hover {
+  background-color: var(--color2-5);
+  border-color: var(--color2-5);
+  outline: none;
+  box-shadow: none;
 }
 
-::-webkit-scrollbar-track{
-    background: var(--color7);
+.bubblebutton.active.focus,
+.bubblebutton.active:focus,
+.bubblebutton.active:hover,
+.bubblebutton:active.focus,
+.bubblebutton:active:focus,
+.bubblebutton:active:hover {
+  background-color: var(--color5);
+  border-color: var(--color5);
+  outline: none;
+  box-shadow: none;
 }
-  
-::-webkit-scrollbar-thumb{
-    background: var(--color3);
 
+/* Bubblecombo for user and photo */
+
+.bubblecombo {
+  background-color: white;
+  border-radius: 10px;
+}
+.bubblecombo:hover {
+  background-color: var(--color6);
+}
+.bubblecombo:hover {
+  background-color: var(--color6-5);
+  border-color: var(--color6-5);
+  outline: none;
+  box-shadow: none;
 }
 
-footer{
-    background-color: var(--color1);
+.bubblecombo.active.focus,
+.bubblecombo.active:focus,
+.bubblecombo.active:hover,
+.bubblecombo:active.focus,
+.bubblecombo:active:focus,
+.bubblecombo:active:hover {
+  background-color: var(--color6);
+  border-color: var(--color6);
+  outline: none;
+  box-shadow: none;
+}
+
+/* Hr's */
+
+hr {
+  color: var(--color3);
+  border: solid 2px var(--color4);
+  border-radius: 10px;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color7);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color3);
+}
+
+/* Footer */
+
+footer {
+  color: #fff;
+  background-color: var(--color1);
+  font-weight: bold;
+}
+
+/* Content height */
+
+.tartalom {
+  min-height: calc(100vh - 28.9vh);
 }

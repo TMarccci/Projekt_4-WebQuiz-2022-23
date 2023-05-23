@@ -33,7 +33,7 @@
   <body>
     <header class="navbar">
       <div class="container-fluid">
-        <div class="navbar-brand" style="margin-top: -2px;">
+        <div class="navbar-brand ms-1" style="margin-top: -2px;">
           <!-- Brand ide -->
           <span>QuizR</span>
         </div>
@@ -41,7 +41,7 @@
           {% if home != True %}
           <div class="me-auto">
             <!-- Ha a felhasználó nem a főoldalon van akkor mutatja a főoldal gombot. -->
-              <div id="homebutton"><a href="{{ url_for('index') }}" class="nav-link" aria-current="page">Főoldal</a></div>
+              <a href="{{ url_for('index') }}" class="nav-link navbarbuttonself btn" aria-current="page">Főoldal</a>
           </div>
           {% endif %}
 
@@ -52,21 +52,21 @@
               <span class="my-auto">
                 {% if gender == "M" %}
                   <div class="mx-3">
-                    <a class="text-dark me-2 bubbleconbo btn" href="/profile/{{ useridself }}">{{ name }} 
-                      <img src="{{ url_for('static', filename='img/man.svg') }}" alt="man">
+                    <a class="text-dark me-2 bubblecombo btn" href="/profile/{{ useridself }}">{{ name }} 
+                      <img src="{{ url_for('static', filename='img/man.svg') }}" alt="man" class="img-fluid">
                     </a>
                   </div>
                 {% else %}
                   <div class="mx-3">
-                    <a class="text-dark me-2 bubbleconbo btn" href="/profile/{{ useridself }}">{{ name }}
-                      <img src="{{ url_for('static', filename='img/woman.svg') }}" alt="woman">
+                    <a class="text-dark me-2 bubblecombo btn" href="/profile/{{ useridself }}">{{ name }}
+                      <img src="{{ url_for('static', filename='img/woman.svg') }}" alt="woman" class="img-fluid">
                     </a>   
                   </div>
                 {% endif %}
               </span>
             </div>
-            <div class="d-flex me-2 text-center">
-                <div class="bubblebutton btn"><a href="/logout" class="nav-link mx-2" aria-current="page">Kijelentkezés</a></div>
+            <div class="d-flex me-1 text-center">
+                <a href="/logout" class="nav-link nav-link bubblebutton me-1 btn" aria-current="page">Kijelentkezés</a>
             </div>
           </div>
 
@@ -76,29 +76,33 @@
           <div class="d-flex me-2 text-center">
             {% if reg %}
               <!-- A felhasználó a regisztráció oldalon van -->
-                <div class="bubblebutton me-3 btn"><a href="/login" class="nav-link " aria-current="page">Bejelentkezés</a></div>
+                <a href="/login" class="nav-link bubblebutton me-1 btn" aria-current="page">Bejelentkezés</a>
             {% elif reg == False %}
               <!-- A felhasználó a bejelentkezés oldalon van -->
-                <div class="bubblebutton me-3 btn"><a href="/register" class="nav-link " aria-current="page">Regisztráció</a></div>
+                <a href="/register" class="nav-link bubblebutton me-1 btn" aria-current="page">Regisztráció</a>
             {% else %}
               <!-- A felhasználó a egyik bejelentkező oldalon sincs (Főoldal, Vagy aloldalak) -->
-                <div class="bubblebutton me-3 btn"><a href="/register" class="nav-link " aria-current="page">Regisztráció</a></div>
-                <div class="bubblebutton me-3 btn"><a href="/login" class="nav-link " aria-current="page">Bejelentkezés</a></div>
+                <a href="/register" class="nav-link bubblebutton me-3 btn" aria-current="page">Regisztráció</a>
+                <a href="/login" class="nav-link bubblebutton me-1 btn" aria-current="page">Bejelentkezés</a>
             {% endif %}
           </div>
           
         {% endif %}
       </div>
     </header>
-    <main class="container-fluid">
+    <main class="container-fluid tartalom my-5 pb-5">
         {% block content %} {% endblock %}
     </main>
-    <footer class="py-2">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12 text-center">
-            <p class="m-0">QuizR &copy; 2023</p>
-          </div>
+    <footer class="container-fluid text-center h-50 py-5">
+      <div class="row">
+        <div class="col align-self-center">
+          
+        </div>
+        <div class="col align-self-center">
+          QuizR &copy; 2023
+        </div>
+        <div class="col align-self-center">
+         
         </div>
       </div>
     </footer>

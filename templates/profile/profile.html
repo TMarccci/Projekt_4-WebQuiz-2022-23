@@ -6,9 +6,9 @@
         <h3 class="text-center mt-5 text-uppercase">
             {{ profile[3] }} (Te)
             {% if profile[8] == 0 %}
-                Férfi
+                <img src="{{ url_for('static', filename='img/man.svg') }}" alt="man" class="img-fluid">
             {% else %}
-                Nő
+                <img src="{{ url_for('static', filename='img/woman.svg') }}" alt="woman" class="img-fluid">
             {% endif %}
         </h3>
         <p class="text-center mb-5">Utoljára bejelentkeztél: {{ profile[7] }}</p>
@@ -16,9 +16,9 @@
         <h3 class="text-center mt-5 text-uppercase">
             {{ profile[3] }}
             {% if profile[8] == 0 %}
-                Férfi
+                <img src="{{ url_for('static', filename='img/man.svg') }}" alt="man" class="img-fluid">
             {% else %}
-                Nő
+                <img src="{{ url_for('static', filename='img/woman.svg') }}" alt="woman" class="img-fluid">
             {% endif %}
         </h3>
         <p class="text-center mb-5">Utoljára bejelentkezett: {{ profile[7] }}</p>
@@ -33,7 +33,13 @@
     <div class="row mb-5 ps-3">
         {% for quiz in range(quizzescount) %}
         <div class="col-10 col-md-4 col-lg-2 p-3 mt-2 mb-3 mx-auto" style="border: 1px solid black; border-radius: 10px; box-shadow: 10px 10px 5px grey;">
-            <span class="px-2 py-1 float-end" style="border: 1px solid black; border-radius: 3px; box-shadow: 3px 3px 5px grey;">{{ quizzes[quiz][7] }}</span>
+            <a onclick="">
+                <span class="px-2 py-1 float-end ms-2" style="background-color: #dc3545; border-radius: 3px; box-shadow: 3px 3px 5px grey;">
+                    <i class="fa fa-trash" aria-hidden="true" style="color: white;"></i>
+                </span>
+            </a>
+            <span class="px-2 py-1 float-end ms-1" style="border: 1px solid black; border-radius: 3px; box-shadow: 3px 3px 5px grey;">{{ quizzes[quiz][7] }}</span>
+
             <a href="/quiz/{{ quizzes[quiz][1] }}">{{ quizzes[quiz][2] }}</a>
             <p>{{ categnames[quiz] }}</p>
         </div>
