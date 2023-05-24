@@ -43,3 +43,4 @@ import auth
 import quiz
 import alpage
 import profiles
+import pagesearch

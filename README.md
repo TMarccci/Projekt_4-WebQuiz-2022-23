@@ -45,4 +45,5 @@
 - Új quiz pakli létrehozása: A felhasználók új quiz paklikat hozhatnak létre. A quiz pakli létrehozásához meg kell adni a quiz pakli nevét, kategóriáját és a quiz pakli kártyáit. A quiz pakli létrehozása után a felhasználó átkerül a kész quiz pakli oldalrára.
 - Quiz: Tanuld meg a kártyákat könnyebben. Nézd meg a megoldásokat, ha mégsem sikerülne. Majd próbáld meg ismét. A QuizR segít a tanulásban.
 - Profil: Itt megtekinthető a saját illetve más felhasználók profiljai. A saját profil esetén adatmódosításra is van lehetőség. Más profilnál pedig a nyilvános quiz paklikat lehet megtekinteni.
+- Keresés: A keresés funkció segítségével a felhasználók megkereshetik a quiz paklikat. A kereséshez meg kell adni a keresendő szöveget és a keresés kategóriáját. A keresés lehet a quiz pakli neve vagy a quiz pakli kategóriája. A keresés eredménye a keresési feltételeknek megfelelő quiz paklik listája.
 - Hiba: Valami hiba történt. A hiba leírása mellett megjelenik a hiba kódja is. A hiba kódját a fejlesztőknek kell elküldeniük, hogy javítsák a hibát vagy utánajárjanak a problémának.
