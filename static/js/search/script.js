@@ -32,6 +32,9 @@ function run() {
       }
 
       for (var quiz in objects) {
+        var cardcol = document.createElement("div");
+        cardcol.className = "col-12 col-md-6 col-lg-4 my-3";
+
         var card = document.createElement("div");
         card.className = "card";
 
@@ -49,11 +52,13 @@ function run() {
         var cardcategory = document.createElement("p");
         cardcategory.innerHTML = objects[quiz][3];
 
+        cardcol.appendChild(card);
+        card.appendChild(cardbody);
         cardbody.appendChild(cardcontroller);
         cardbody.appendChild(cardlink);
         cardbody.appendChild(cardcategory);
-        card.appendChild(cardbody);
-        cardholder.appendChild(card);
+
+        cardholder.appendChild(cardcol);
       }
     }
   };
