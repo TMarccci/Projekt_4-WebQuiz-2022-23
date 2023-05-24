@@ -276,3 +276,10 @@ footer {
   border-radius: 50%;
   background: white;
 }
+
+/* Footerlink */
+
+.footerlink {
+  color: #fff;
+  text-decoration: none;
+}
