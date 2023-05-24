@@ -133,7 +133,7 @@ deletecard = (id) => {
     const i = parseInt(cardnumber.innerHTML)-1;
 
     // Remove card
-    const card = document.getElementById(`flashcard${ i }`);
+    const card = document.getElementById(`flashcard${ id }`);
     card.remove();
 
     // Update card number
@@ -141,19 +141,18 @@ deletecard = (id) => {
 
     // Renumber cards
     cardsdiv = document.getElementById('cardslist');
+
     for (let j = 0; j < cardsdiv.children.length; j++) {
         const card = cardsdiv.children[j];
         card.id = `flashcard${ j }`;
         card.children[0].children[0].children[0].children[0].innerHTML = `${ j+1 }. kártya`;
-        card.children[0].children[0].children[1].children[0].id = `remove${ j+1 }btn`;
-        card.children[1].children[0].children[0].children[0].children[0].id = `card${ j+1 }side1label`;
-        card.children[1].children[0].children[0].children[1].children[0].children[0].id = `card${ j+1 }side1typetext`;
-        card.children[1].children[0].children[0].children[1].children[1].children[0].id = `card${ j+1 }side1typeimg`;
-        card.children[1].children[0].children[0].children[1].children[2].id = `card${ j+1 }side1text`;
-        card.children[1].children[0].children[1].children[0].children[0].id = `card${ j+1 }side2label`;
-        card.children[1].children[0].children[1].children[1].children[0].children[0].id = `card${ j+1 }side2typetext`;
-        card.children[1].children[0].children[1].children[1].children[1].children[0].id = `card${ j+1 }side2typeimg`;
-        card.children[1].children[0].children[1].children[1].children[2].id = `card${ j+1 }side2text`;
+        card.children[0].children[0].children[1].children[0].id = `remove${ j }btn`;
+        card.children[1].children[0].children[0].children[1].children[0].children[0].id = `card${ j }side1typetext`;
+        card.children[1].children[0].children[0].children[1].children[1].children[0].id = `card${ j }side1typeimg`;
+        card.children[1].children[0].children[0].children[1].children[2].id = `card${ j }side1text`;
+        card.children[1].children[0].children[1].children[1].children[0].children[0].id = `card${ j }side2typetext`;
+        card.children[1].children[0].children[1].children[1].children[1].children[0].id = `card${ j }side2typeimg`;
+        card.children[1].children[0].children[1].children[1].children[2].id = `card${ j }side2text`;
     }
 }
 
