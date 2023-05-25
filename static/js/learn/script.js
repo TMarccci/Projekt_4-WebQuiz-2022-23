@@ -120,3 +120,8 @@ flipCard = function() {
         document.getElementById('card' + currentCardInt + 'front').classList.add('d-none');
     }
 }
+
+// Swipe page to top after 1 second
+setTimeout(function() {
+    window.scrollTo(0, 0);
+}, 200);
