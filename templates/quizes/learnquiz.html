@@ -10,9 +10,15 @@
         <strong class="d-none d-md-inline">-</strong> Készítve: {{ quiz[4] }}
         <br class="d-md-none">
         {% if quiz[4] != quiz[5] %}
-        <strong class="d-none md-inline">-</strong> Legutóbb módosítva: {{ quiz[5] }}
+        <strong class="d-none d-md-inline">-</strong> Legutóbb módosítva: {{ quiz[5] }}
         {% endif %}
     </p>
+    <!--
+        <p class="text-center mb-5">
+        <a class="sharegomb sharegomb-icon sharegomb-url" href="#"><i class="fa fa-external-link"></i><span class="ms-2">Link másolása</span></a>
+    </p>
+    -->
+    
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <div class="col-12 col-md-7 mx-auto text-center alert alert-info text-uppercase mb-5">
@@ -22,9 +28,9 @@
     {% endwith %}
     <div class="container">
         <div class="row mx-auto">
-            <div class="col-3 d-flex align-items-center justify-content-center">
+            <div class="col-1 col-md-3 d-flex align-items-center justify-content-center">
             </div>
-            <a href="javascript:flipCard()" class="col-6 h5" style="color: black;">
+            <a href="javascript:flipCard()" class="col-10 col-md-6 h5" style="color: black;">
                 <div class="tab-content text-center" id="cardsholder">
                     {% for i in range(quiz[7]) %}
                         {% if i == 0 %}
@@ -34,14 +40,14 @@
                         {% endif %}
                                 <span id="card{{ i }}front" class="align-middle">
                                     {% if quizcontents[i][1] == "text" %}
-                                        {{ quizcontents[i][3] }}
+                                        {{ quizcontents[i][3]|safe }}
                                     {% else %}
                                         <img src="{{ quizcontents[i][3] }}" alt="Ha ezt látod, akkor a kép URL hibás" class="img-fluid cardimg">
                                     {% endif %}
                                 </span>
                                 <span id="card{{ i }}back" class="d-none align-middle">
                                     {% if quizcontents[i][2] == "text" %}
-                                        {{ quizcontents[i][4] }}
+                                        {{ quizcontents[i][4]|safe }}
                                     {% else %}
                                         <img src="{{ quizcontents[i][4] }}" alt="Ha ezt látod, akkor a kép URL hibás" class="img-fluid cardimg">
                                     {% endif %}
@@ -50,28 +56,46 @@
                     {% endfor %}
                 </div>
             </a>
-            <div class="col-3 d-flex align-items-center justify-content-center">
+            <div class="col-1 col-md-3 d-flex align-items-center justify-content-center">
             </div>
         </div>
         <div class="row mt-4 text-center">
-            <div class="col-5"></div>
-            <div class="col-1 mx-auto">
+            <div class="col-4 col-md-5"></div>
+            <div class="col-2 col-md-1 mx-auto">
                 <a href="javascript:prevCard()" class="navoncard p-2 mx-auto">
                     <i class="fa fa-arrow-left" aria-hidden="true" style="color: white;">
                     </i>
                 </a>
             </div>
-            <div class="col-1 mx-auto">
+            <div class="col-2 col-md-1 mx-auto">
                 <a href="javascript:nextCard()" class="navoncard p-2 mx-auto">
                     <i class="fa fa-arrow-right" aria-hidden="true" style="color: white;">
                     </i>
                 </a>
             </div>
-            <div class="col-5"></div>
+            <div class="col-4 col-md-5"></div>
         </div>
-        <div class="row mt-4">
+        <div class="row mt-4 mb-3">
             <span class="text-center">Kártya: <span id="currentcardtext">1</span> / <span id="maxcardtext">{{ quiz[7] }}</span></span>
         </div>
+        <div class="row my-5">
+            <div class="col-4 col-md-5 mx-auto">
+                <hr>
+            </div>
+        </div>
+        <div class="row mt-5 h4">
+            Quiz elemei:
+        </div>
+        {% for i in range(quiz[7]) %}
+        <div class="row mt-4">
+            <div class="col-6">
+                {{ quizcontents[i][3]|safe }}
+            </div>
+            <div class="col-6">
+                {{ quizcontents[i][4]|safe }}
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
 <script src="{{ url_for('static', filename='js/learn/script.js') }}"></script>

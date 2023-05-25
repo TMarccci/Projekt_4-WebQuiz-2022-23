@@ -1,5 +1,5 @@
 Flask==2.2.3
-mysql_connector_repackaged==0.3.1
+flask_squeeze==3.0.8
 mysql.connector==2.2.9
 python-dotenv==1.0.0
 Werkzeug==2.2.3
