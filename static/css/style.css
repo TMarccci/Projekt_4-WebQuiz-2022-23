@@ -290,3 +290,13 @@ footer {
   color: #fff;
   text-decoration: none;
 }
+
+/* next, prev */
+
+.navoncard{
+  background-color: var(--color1);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  display: block;
+}

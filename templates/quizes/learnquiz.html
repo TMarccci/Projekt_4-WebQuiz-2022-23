@@ -22,12 +22,9 @@
     {% endwith %}
     <div class="container">
         <div class="row mx-auto">
-            <div class="col-2 d-flex align-items-center justify-content-center">
-                <a class="page-link" onclick="prevCard()" aria-label="Előző">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
+            <div class="col-3 d-flex align-items-center justify-content-center">
             </div>
-            <div class="col-8">
+            <a href="javascript:flipCard()" class="col-6 h5" style="color: black;">
                 <div class="tab-content text-center" id="cardsholder">
                     {% for i in range(quiz[7]) %}
                         {% if i == 0 %}
@@ -52,19 +49,27 @@
                             </div>
                     {% endfor %}
                 </div>
+            </a>
+            <div class="col-3 d-flex align-items-center justify-content-center">
             </div>
-            <div class="col-2 d-flex align-items-center justify-content-center">
-                <a class="page-link" onclick="nextCard()" aria-label="Következő">
-                    <span aria-hidden="true">&raquo;</span>
+        </div>
+        <div class="row mt-4 text-center">
+            <div class="col-5"></div>
+            <div class="col-1 mx-auto">
+                <a href="javascript:prevCard()" class="navoncard p-2 mx-auto">
+                    <i class="fa fa-arrow-left" aria-hidden="true" style="color: white;">
+                    </i>
                 </a>
             </div>
-        </div>
-        <div class="row my-5 py-2">
-            <div class="col-12 col-md-7 mx-auto text-center flipbtn">
-                <button class="btn btn-primary" onclick="flipCard()">Fordítás</button>
+            <div class="col-1 mx-auto">
+                <a href="javascript:nextCard()" class="navoncard p-2 mx-auto">
+                    <i class="fa fa-arrow-right" aria-hidden="true" style="color: white;">
+                    </i>
+                </a>
             </div>
+            <div class="col-5"></div>
         </div>
-        <div class="row mb-2">
+        <div class="row mt-4">
             <span class="text-center">Kártya: <span id="currentcardtext">1</span> / <span id="maxcardtext">{{ quiz[7] }}</span></span>
         </div>
     </div>
