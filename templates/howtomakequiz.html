@@ -2,7 +2,19 @@
 
 {% block content %}
 <div class="container-fluid">
-    <h3 class="text-center my-5 py-3 text-uppercase">Quiz pakli készítés útmutató</h3>
+    <h1 class="text-center my-5 py-3">Az alkalmazás használata</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-5">
+                <h2>Bejelentkezés / regisztráció</h2>
+                <p>A kártya paklik használatához először be kell jelentkeznie a felhasználónak. Ha a felhasználónak még nincs fiókja akkor a regisztráció gombra kattintva tud létre hozni egyet. Ha a felhasználónak már van fiókja akkor a bejelentkezés gombra kattintva tud bejelentkezni.</p>
+            </div>
+            <div class="col-7">
+                <img src="{{ url_for('static', filename='img/ideiglenes.png') }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+            </div>
+        </div>
+    </div>
+
 </div>
 
 {% endblock %}
