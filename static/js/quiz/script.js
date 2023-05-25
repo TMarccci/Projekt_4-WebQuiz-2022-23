@@ -147,6 +147,7 @@ deletecard = (id) => {
         card.id = `flashcard${ j }`;
         card.children[0].children[0].children[0].children[0].innerHTML = `${ j+1 }. kártya`;
         card.children[0].children[0].children[1].children[0].id = `remove${ j }btn`;
+        card.children[0].children[0].children[1].children[0].setAttribute('onclick', `deletecard(${ j })`);
         card.children[1].children[0].children[0].children[1].children[0].children[0].id = `card${ j }side1typetext`;
         card.children[1].children[0].children[0].children[1].children[1].children[0].id = `card${ j }side1typeimg`;
         card.children[1].children[0].children[0].children[1].children[2].id = `card${ j }side1text`;

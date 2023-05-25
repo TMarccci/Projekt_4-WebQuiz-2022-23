@@ -26,12 +26,12 @@
         </div>
         <div class="col-12 col-md-4 col-lg-2 mt-4 mt-md-0">
             <label class="cb-container">Minden kategória
-                <input type="radio" name="categoryfilter" value="-1" checked>
+                <input class="radioselector" type="radio" name="categoryfilter" value="-1" checked>
                 <span class="cb-checkmark"></span>
             </label>
             {% for categ in categories %}
                 <label class="cb-container">{{ categ[1] }}
-                    <input type="radio" name="categoryfilter" value="{{ categ[0] }}">
+                    <input class="radioselector" type="radio" name="categoryfilter" value="{{ categ[0] }}">
                     <span class="cb-checkmark"></span>
                 </label>
             {% endfor %}

@@ -63,6 +63,11 @@
                                 </span>
                             </a>
                         </form>
+                        <a href="/editquiz/{{ quizzes[quiz][1] }}" onclick="document.getElementById('delete{{ quiz }}').submit()">
+                            <span class="px-2 py-1 float-end ms-2 pencil">
+                                <i class="fa fa-pencil" aria-hidden="true" style="color: white;"></i>
+                            </span>
+                        </a>
                         <span class="px-2 py-1 float-end ms-2" style="margin-top: 2px">
                             {% if quizzes[quiz][8] == 0 %}
                                 <div class="controllerparents">

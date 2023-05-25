@@ -35,6 +35,8 @@
 - 0x022 - Hiba történt a priváttá tétel alatt! (Quiz Pakli)
 - 0x023 - Hiba történt a keresésben való megjelenítés alatt! (Quiz Pakli)
 - 0x024 - Hiba történt a keresésben való elrejtés alatt! (Quiz Pakli)
+- 0x025 - Quiz szerkesztéséhez jelentkezz be vagy regisztrálj!
+- 0x026 - Quiz nem található vagy nincs jogod a quiz szereksztéséhez!
 
 ## Leírások
 - Főoldal: A QuizR egy webes alkalmazás, amely lehetővé teszi a felhasználók számára, hogy saját kvíz paklikat készítsenek, és azokat megosszák másokkal. A QuizR egyben lehetőséget biztosít a felhasználók számára, hogy mások által készített kvíz paklikat tanuljanak, és teszteljék tudásukat.
@@ -46,4 +48,5 @@
 - Quiz: Tanuld meg a kártyákat könnyebben. Nézd meg a megoldásokat, ha mégsem sikerülne. Majd próbáld meg ismét. A QuizR segít a tanulásban.
 - Profil: Itt megtekinthető a saját illetve más felhasználók profiljai. A saját profil esetén adatmódosításra is van lehetőség. Más profilnál pedig a nyilvános quiz paklikat lehet megtekinteni.
 - Keresés: A keresés funkció segítségével a felhasználók megkereshetik a quiz paklikat. A kereséshez meg kell adni a keresendő szöveget és a keresés kategóriáját. A keresés lehet a quiz pakli neve vagy a quiz pakli kategóriája. A keresés eredménye a keresési feltételeknek megfelelő quiz paklik listája.
+- Quiz pakli szerkesztése: Ez az oldal a quiz pakli szerkesztésére szolgál. A quiz pakli módosítását, a létrehozáshoz hasonlóan kell csinálni. A quiz pakli szerkesztése után a felhasználó átkerül a kész quiz pakli oldalára.
 - Hiba: Valami hiba történt. A hiba leírása mellett megjelenik a hiba kódja is. A hiba kódját a fejlesztőknek kell elküldeniük, hogy javítsák a hibát vagy utánajárjanak a problémának.

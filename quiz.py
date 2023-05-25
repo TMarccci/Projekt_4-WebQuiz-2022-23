@@ -1,4 +1,5 @@
 from app import *
+import datetime
 
 def sendQuiz(quizz, username, gender, useridself):
         descerror = "Valami hiba történt. A hiba leírása mellett megjelenik a hiba kódja is. A hiba kódját a fejlesztőknek kell elküldeniük, hogy javítsák a hibát vagy utánajárjanak a problémának."
@@ -175,3 +176,112 @@ def quiz(quizid):
             # If quiz is public
             else:
                 return sendQuiz(quiz, None, None, None)
+            
+@app.route('/editquiz/<quizid>')
+def editquiz(quizid):
+    descerror = "Valami hiba történt. A hiba leírása mellett megjelenik a hiba kódja is. A hiba kódját a fejlesztőknek kell elküldeniük, hogy javítsák a hibát vagy utánajárjanak a problémának."
+    description = "Ez az oldal a quiz pakli szerkesztésére szolgál. A quiz pakli módosítását, a létrehozáshoz hasonlóan kell csinálni. A quiz pakli szerkesztése után a felhasználó átkerül a kész quiz pakli oldalára."
+    
+    if 'loggedin' in session:
+        useridself = session['id']
+        username, gender = getUserData(useridself)[0], getUserData(useridself)[1]
+        
+        # Check if the user is the owner of the quiz
+        cnx = cnxpool.get_connection()
+        cursor = cnx.cursor()
+        cursor.execute("SELECT * FROM quizlist WHERE quizid = %s AND ownerid = %s", (quizid, useridself))
+        quiz = cursor.fetchone()
+        cursor.close()
+        cnx.close()
+        
+        if quiz is None:
+            flash('Quiz nem található vagy nincs jogod a quiz szereksztéséhez! 0x026')
+            return render_template('error.html', title='QuizR - Hiba', logged_in=True, name=username, gender=gender, useridself=useridself, description=descerror)
+        else:
+            # Get the quiz contents
+            cnx = cnxpool.get_connection()
+            cursor = cnx.cursor()
+            cursor.execute("SELECT * FROM quizcontents WHERE quizid = %s", (quizid,))
+            quizcontents = cursor.fetchall()
+            cursor.close()
+            cnx.close()
+            
+            # Get the category list
+            cnx = cnxpool.get_connection()
+            cursor = cnx.cursor()
+            cursor.execute("SELECT * FROM quizcategories")
+            categories = cursor.fetchall()
+            cursor.close()
+            cnx.close()
+            
+            return render_template('quizes/editquiz.html', title=f"QuizR - { quiz[2] } szerkesztés", logged_in=True, gender=gender, useridself=useridself, name=username, quiz=quiz, quizcontents=quizcontents, categories=categories, description=description)
+            
+    else:
+        flash('Quiz szerkesztéséhez jelentkezz be vagy regisztrálj! 0x025')
+        return render_template('error.html', title='QuizR - Hiba', logged_in=False, description=descerror)
+
+@app.route('/editquiz/<quizid>', methods=['POST'])
+def editquizpost(quizid):
+    if 'loggedin' not in session:
+        return Response(status=403)
+    else:
+        # If the form doesnt have the required fields, return error
+        if 'quizname' not in request.form or 'category' not in request.form or 'ispublic' not in request.form:
+            return Response(status=400)
+        else:
+            # Check if the user is the owner of the quiz
+            cnx = cnxpool.get_connection()
+            cursor = cnx.cursor()
+            cursor.execute("SELECT * FROM quizlist WHERE quizid = %s AND ownerid = %s", (quizid, session['id']))
+            quiz = cursor.fetchone()
+            cursor.close()
+            cnx.close()
+            
+            if quiz:
+                # Get the form data
+                quizname = request.form['quizname']
+                category = request.form['category']
+                ispublic = request.form['ispublic']
+                if 'appearinsearch' in request.form:
+                    appearinsearch = request.form['appearinsearch']
+                else:
+                    appearinsearch = 0
+                seqcount = request.form['seqcount']
+                now = datetime.datetime.now()
+                
+                # Update the quiz
+                cnx = cnxpool.get_connection()
+                cursor = cnx.cursor()
+                cursor.execute("UPDATE quizlist SET quizname = %s, quizcateg = %s, ispublic = %s, appearonsearch = %s, lastedit = %s, seqcount = %s WHERE quizid = %s", (quizname, category, ispublic, appearinsearch, now, seqcount, quizid))
+                cnx.commit()
+                cursor.close()
+                cnx.close()
+                
+                # Delete the old quiz contents
+                cnx = cnxpool.get_connection()
+                cursor = cnx.cursor()
+                cursor.execute("DELETE FROM quizcontents WHERE quizid = %s", (quizid,))
+                cnx.commit()
+                cursor.close()
+                cnx.close()
+                
+                # Insert the new quiz contents
+                for i in range(int(seqcount)):
+                    seqnum = i
+                    sideonetype = request.form['card' + str(i) + 'side1type']
+                    sideonecontent = request.form['card' + str(i) + 'side1text']
+                    sidetwotype = request.form['card' + str(i) + 'side2type']
+                    sidetwocontent = request.form['card' + str(i) + 'side2text']
+                    
+                    cnx = cnxpool.get_connection()
+                    cursor = cnx.cursor()
+                    cursor.execute("INSERT INTO quizcontents (quizid, seqnum, sideonetype, sidetwotype, sideone, sidetwo) VALUES (%s, %s, %s, %s, %s, %s)", (quizid, seqnum, sideonetype, sidetwotype, sideonecontent, sidetwocontent))
+
+                    # Commit the changes
+                    cnx.commit()
+                    cursor.close()
+                    cnx.close()
+                    
+                return redirect(url_for('quiz', quizid=quizid))
+            else:
+                return Response(status=403)

@@ -22,7 +22,6 @@ function run() {
     if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
       console.log(this.responseText);
       var objects = JSON.parse(this.responseText);
-      console.log(objects);
 
       var cardholder = document.getElementById("cardholder");
 
@@ -76,3 +75,13 @@ if (submit != null) {
 }
 
 run();
+
+if (document.querySelector('input[name="categoryfilter"]')) {
+  document.querySelectorAll('input[name="categoryfilter"]').forEach((elem) => {
+    elem.addEventListener("change", function(event) {
+      run();
+    });
+  });
+}
+
+
