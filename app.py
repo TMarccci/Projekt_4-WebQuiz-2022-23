@@ -1,9 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, Response, jsonify
+from flask_squeeze import Squeeze
 from dotenv import load_dotenv
 import mysql.connector.pooling, os, uuid, json
 
 load_dotenv()
 app = Flask(__name__)
+squeeze = Squeeze()
+squeeze.init_app(app)
+
 app.config['SECRET_KEY'] = os.getenv('secret')
 
 # Database Settings
