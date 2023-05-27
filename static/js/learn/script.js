@@ -1,21 +1,39 @@
-// Set the current card from URL
-var currentCard = window.location.hash;
-// If no current card, set to 0
-if (currentCard == '') {
-    currentCard = '#card-0';
+// Get current card
+var currentCard = 0;
+var queryString = window.location.href.split('?')[1];
+
+// If query string exists, split it and retrieve the value
+if (queryString) {
+    var cardParam = queryString.split('=')[1];
+    if (cardParam) {
+        currentCard = parseInt(cardParam);
+    } 
+} else {
     // Set URL to current card
-    window.location.href = currentCard;
+    window.history.pushState('', '', '?currentcard=' + currentCard);
 }
 
-var currentCardInt = parseInt(currentCard.replace('#card-', ''));
+var currentCardInt = currentCard
 var maxCard = document.getElementById('maxcardtext');
 var maxCardInt = parseInt(maxCard.innerHTML);
 
 // If current card is greater than max card, set to max card
 if (currentCardInt >= maxCardInt) {
     currentCard = '#card-' + (maxCardInt - 1);
+
     // Set URL to current card
-    window.location.href = currentCard;
+    window.history.pushState('', '', '?currentcard=' + (maxCardInt - 1));
+
+    currentCardInt = parseInt(currentCard.replace('#card-', ''));
+}
+
+// If current card is less than 0, set to 0
+if (currentCardInt < 0) {
+    currentCard = '#card-0';
+    
+    // Set URL to current card
+    window.history.pushState('', '', '?currentcard=0');
+
     currentCardInt = parseInt(currentCard.replace('#card-', ''));
 }
 
@@ -48,8 +66,8 @@ prevCard = function() {
         currentCardInt -= 2;
         currentCard.innerHTML = currentCardInt+1;
 
-        // Redirect to last card with id of maxCard
-        window.location.href = '#card-' + currentCardInt;
+        // Set URL to current card
+        window.history.pushState('', '', '?currentcard=' + (currentCardInt));
 
         currentCardInt += 1;
 
@@ -80,8 +98,8 @@ nextCard = function() {
         // Set currentCard
         currentCard.innerHTML = currentCardInt+1;
 
-        // Redirect to last card with id of maxCard
-        window.location.href = '#card-' + currentCardInt;
+        // Set URL to current card
+        window.history.pushState('', '', '?currentcard=' + (currentCardInt));
 
         currentCardInt -= 1;
 
@@ -120,8 +138,3 @@ flipCard = function() {
         document.getElementById('card' + currentCardInt + 'front').classList.add('d-none');
     }
 }
-
-// Swipe page to top after 1 second
-setTimeout(function() {
-    window.scrollTo(0, 0);
-}, 200);
