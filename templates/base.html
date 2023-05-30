@@ -23,7 +23,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
     <meta name="og:image" content="{{ url_for('static', filename='img/Logo.png') }}">
-    <link rel="icon" href="{{ url_for('static', filename='img/Logo.png') }}" type="image/png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
@@ -34,8 +37,7 @@
     <header class="navbar">
       <div class="container-fluid">
         <div class="navbar-brand ms-1" style="margin-top: -2px;">
-          <!-- Brand ide -->
-          <span>QuizR</span>
+          <span style="font-weight: bold">QuizR</span>
         </div>
 
           {% if home != True %}
@@ -51,13 +53,13 @@
             <div class="text-center row">
               <span class="my-auto">
                 {% if gender == "M" %}
-                  <div class="mx-3">
+                  <div class="ms-3 me-1">
                     <a class="text-dark me-2 bubblecombo btn" href="/profile/{{ useridself }}">{{ name }} 
                       <img src="{{ url_for('static', filename='img/man.svg') }}" alt="man" class="img-fluid">
                     </a>
                   </div>
                 {% else %}
-                  <div class="mx-3">
+                  <div class="ms-3 me-1">
                     <a class="text-dark me-2 bubblecombo btn" href="/profile/{{ useridself }}">{{ name }}
                       <img src="{{ url_for('static', filename='img/woman.svg') }}" alt="woman" class="img-fluid">
                     </a>   
@@ -66,7 +68,7 @@
               </span>
             </div>
             <div class="d-flex me-1 text-center">
-                <a href="/logout" class="nav-link nav-link bubblebutton me-1 btn" aria-current="page">Kijelentkezés</a>
+                <a href="/logout" class="nav-link nav-link bubblebutton me-1 btn" aria-current="page"><i class="fa fa-sign-out px-1" aria-hidden="true"></i></a>
             </div>
           </div>
 
