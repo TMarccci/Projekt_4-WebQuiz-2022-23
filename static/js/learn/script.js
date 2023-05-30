@@ -138,3 +138,17 @@ flipCard = function() {
         document.getElementById('card' + currentCardInt + 'front').classList.add('d-none');
     }
 }
+
+// Add event listener to left arrow button to go to previous card
+window.addEventListener('keydown', function(e) {
+    if(e.keyCode == 32 && e.target == document.body) {
+      e.preventDefault();
+        flipCard();
+    } else if (e.keyCode == 37 || e.keyCode == 65 && e.target == document.body) {
+        e.preventDefault();
+        prevCard();
+    } else if (e.keyCode == 39 || e.keyCode == 68 && e.target == document.body) {
+        e.preventDefault();
+        nextCard();
+    }
+  });

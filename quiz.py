@@ -28,8 +28,8 @@ def sendQuiz(quizz, username, gender, useridself):
         # Get who created the quiz
         cnx = cnxpool.get_connection()
         cursor = cnx.cursor()
-        cursor.execute("SELECT username FROM users WHERE userid = %s", (quizz[6],))
-        quizcreator = cursor.fetchone()[0]
+        cursor.execute("SELECT * FROM users WHERE userid = %s", (quizz[6],))
+        creator = cursor.fetchone()
         cursor.close()
         cnx.close()
 
@@ -42,7 +42,7 @@ def sendQuiz(quizz, username, gender, useridself):
                 flash('Hiba történt! 0x009')
                 return render_template('error.html', title='QuizR - Hiba történt', logged_in=True, name=username, gender=gender, useridself=useridself, description=descerror)
             
-            return render_template('quizes/learnquiz.html', title='QuizR - ' + quizcategory + ' - ' + quizz[2], logged_in=True, name=username, gender=gender, useridself=useridself, quiz=quizz, quizcategory=quizcategory, quizcontents=quizcontents, quizcreator=quizcreator, description=description)
+            return render_template('quizes/learnquiz.html', title='QuizR - ' + quizcategory + ' - ' + quizz[2], logged_in=True, name=username, gender=gender, useridself=useridself, quiz=quizz, quizcategory=quizcategory, quizcontents=quizcontents, quizcreatorid=creator[1], quizcreator=creator[3],description=description)
         else:
             # Handle errors
             if quizcategory is None:

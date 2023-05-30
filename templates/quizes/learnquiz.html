@@ -13,11 +13,6 @@
         <strong class="d-none d-md-inline">-</strong> Legutóbb módosítva: {{ quiz[5] }}
         {% endif %}
     </p>
-    <!--
-        <p class="text-center mb-5">
-        <a class="sharegomb sharegomb-icon sharegomb-url" href="#"><i class="fa fa-external-link"></i><span class="ms-2">Link másolása</span></a>
-    </p>
-    -->
     
     {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -78,6 +73,17 @@
         <div class="row mt-4 mb-3">
             <span class="text-center">Kártya: <span id="currentcardtext">1</span> / <span id="maxcardtext">{{ quiz[7] }}</span></span>
         </div>
+        <p class="text-center my-5" id="copylink">
+            <a class="sharegomb sharegomb-icon sharegomb-url" href="javascript:copyLink()"><i class="fa fa-external-link"></i><span class="ms-2">Quiz Link másolása</span></a>
+        </p>
+        <script>
+            function copyLink() {
+                navigator.clipboard.writeText("https://quizr.tmarccci.hu/quiz/{{ quiz[1] }}");
+
+                // Replace copylink innerHTML to
+                document.getElementById("copylink").innerHTML = '<div class="col-12 col-md-8 mx-auto text-center alert alert-success">A quiz linkje sikeresen a vágólapra lett téve!<br><a class="sharegomb sharegomb-icon sharegomb-url" href="javascript:copyLink()"><i class="fa fa-external-link"></i><span class="ms-2">Másol megint</span></a></div>';
+            }
+        </script>
         <div class="row my-5">
             <div class="col-4 col-md-5 mx-auto">
                 <hr>
@@ -96,6 +102,28 @@
             </div>
         </div>
         {% endfor %}
+
+        <div class="row mt-5 h4">
+            Quiz műveletek:
+        </div>
+        {% if useridself == quizcreatorid %}
+            <div class="d-flex mt-3">
+                <a href="/editquiz/{{ quiz[1] }}">
+                    <span class="px-2 py-1 mx-3 pencil">
+                        <i class="fa fa-pencil" aria-hidden="true" style="color: white;"></i>
+                    </span>
+                </a>
+                <form method="post" action="/deletequiz" id="0">
+                    <input type="hidden" name="quizid" value="{{ quiz[1] }}">
+                    <a href="#" onclick="document.getElementById('0').submit()">
+                        <span class="px-2 py-1 ms-3 trash">
+                            <i class="fa fa-trash" aria-hidden="true" style="color: white;"></i>
+                        </span>
+                    </a>
+                </form>
+            </div>
+        {% endif %}
+        
     </div>
 </div>
 <script src="{{ url_for('static', filename='js/learn/script.js') }}"></script>
