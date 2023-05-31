@@ -103,10 +103,10 @@
         </div>
         {% endfor %}
 
+        {% if useridself == quizcreatorid %}
         <div class="row mt-5 h4">
             Quiz műveletek:
         </div>
-        {% if useridself == quizcreatorid %}
             <div class="d-flex mt-3">
                 <a href="/editquiz/{{ quiz[1] }}">
                     <span class="px-2 py-1 mx-3 pencil">
