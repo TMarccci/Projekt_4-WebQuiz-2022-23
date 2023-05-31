@@ -52,7 +52,7 @@ def sendQuiz(quizz, username, gender, useridself):
                 flash('Hiba történt! 0x010')
                 return render_template('error.html', title='QuizR - Hiba történt', logged_in=False, description=descerror)
 
-            return render_template('quizes/learnquiz.html', title='QuizR - ' + quizcategory + ' - ' + quizz[2], logged_in=False, quiz=quizz, quizcategory=quizcategory, quizcontents=quizcontents, quizcreator=creator[1], description=description)
+            return render_template('quizes/learnquiz.html', title='QuizR - ' + quizcategory + ' - ' + quizz[2], logged_in=False, quiz=quizz, quizcategory=quizcategory, quizcontents=quizcontents, quizcreatorid=creator[1], quizcreator=creator[3],description=description)
 
 @app.route('/createquiz')
 def createquiz():
