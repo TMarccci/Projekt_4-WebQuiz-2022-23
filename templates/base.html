@@ -78,14 +78,14 @@
           <div class="d-flex me-2 text-center">
             {% if reg %}
               <!-- A felhasználó a regisztráció oldalon van -->
-                <a href="/login" class="nav-link bubblebutton me-1 btn" aria-current="page">Bejelentkezés</a>
+                <a href="/login" class="nav-link bubblebutton me-1 btn" aria-current="page"><i class="fa fa-sign-in px-1" aria-hidden="true"></i></a>
             {% elif reg == False %}
               <!-- A felhasználó a bejelentkezés oldalon van -->
-                <a href="/register" class="nav-link bubblebutton me-1 btn" aria-current="page">Regisztráció</a>
+                <a href="/register" class="nav-link bubblebutton me-1 btn" aria-current="page"><i class="fa fa-user-plus px-1" aria-hidden="true"></i></a>
             {% else %}
               <!-- A felhasználó a egyik bejelentkező oldalon sincs (Főoldal, Vagy aloldalak) -->
-                <a href="/register" class="nav-link bubblebutton me-3 btn" aria-current="page">Regisztráció</a>
-                <a href="/login" class="nav-link bubblebutton me-1 btn" aria-current="page">Bejelentkezés</a>
+                <a href="/register" class="nav-link bubblebutton me-3 btn" aria-current="page"><i class="fa fa-user-plus px-1" aria-hidden="true"></i></a>
+                <a href="/login" class="nav-link bubblebutton me-1 btn" aria-current="page"><i class="fa fa-sign-in px-1" aria-hidden="true"></i></a>
             {% endif %}
           </div>
           
@@ -98,13 +98,13 @@
     <footer class="container-fluid text-center h-50 py-5">
       <div class="row">
         <div class="col align-self-center">
-          <div class="row"><a href="/" class="footerlink" aria-current="page">Főoldal</a></div>
-          <div class="row"><a href="/search" class="footerlink" aria-current="page">Kereső</a></div>
+          <div class="row mb-1"><a href="/" class="footerlink" aria-current="page">Főoldal</a></div>
+          <div class="row mb-1"><a href="/search" class="footerlink" aria-current="page">Kereső</a></div>
+          <div class="row mb-1"><a href="/policy" class="footerlink" aria-current="page">Adatkezelési Tájékoztató</a></div>
         </div>
-        <div class="col align-self-center">
-          <div class="row"><a href="/createquiz" class="footerlink" aria-current="page">Új Quiz Pakli Készítése</a></div>
-          <div class="row"><a href="/howtomakequiz" class="footerlink" aria-current="page">Quiz Pakli Készítési Útmutató</a></div>
-          <div class="row"><a href="/policy" class="footerlink" aria-current="page">Adatkezelési Tájékoztató</a></div>
+        <div class="col align-self-center d-none d-md-block">
+          <div class="row mb-1"><a href="/createquiz" class="footerlink" aria-current="page">Új Quiz Pakli Készítése</a></div>
+          <div class="row mb-1"><a href="/howtomakequiz" class="footerlink" aria-current="page">Quiz Pakli Készítési Útmutató</a></div>
         </div>
         <div class="col align-self-center">
           QuizR &copy; 2023
