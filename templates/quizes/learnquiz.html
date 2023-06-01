@@ -29,9 +29,9 @@
                 <div class="tab-content text-center" id="cardsholder">
                     {% for i in range(quiz[7]) %}
                         {% if i == 0 %}
-                            <div class="quizcard tab-pane fade show active d-flex align-items-center justify-content-center" id="card-{{ i }}">
+                            <div class="quizcard tab-pane fade show active d-flex align-items-center justify-content-center p-3" id="card-{{ i }}">
                         {% else %}
-                            <div class="quizcard tab-pane fade align-items-center justify-content-center" id="card-{{ i }}">
+                            <div class="quizcard tab-pane fade align-items-center justify-content-center p-3" id="card-{{ i }}">
                         {% endif %}
                                 <span id="card{{ i }}front" class="align-middle">
                                     {% if quizcontents[i][1] == "text" %}
