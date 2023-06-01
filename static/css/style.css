@@ -291,7 +291,7 @@ footer {
   text-decoration: none;
 }
 
-/* next, prev */
+/* Next, Prev */
 
 .navoncard{
   background-color: var(--color1);
@@ -301,3 +301,8 @@ footer {
   display: block;
 }
 
+/* Policy page */
+
+#policy{
+  line-height: 50px;
+}
