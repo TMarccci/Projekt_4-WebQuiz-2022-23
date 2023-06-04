@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, Response, jsonify
 from flask_squeeze import Squeeze
 from dotenv import load_dotenv
-import mysql.connector.pooling, os, uuid, json
+import mysql.connector as mysql
+from mysql.connector import pooling
+import os, uuid, json
 
 load_dotenv()
 app = Flask(__name__)
@@ -16,7 +18,7 @@ dbUser = os.getenv('dbUser')
 dbPass = os.getenv('dbPass')
 dbName = os.getenv('dbName')
 
-cnxpool = mysql.connector.pooling.MySQLConnectionPool(pool_name="mypool", pool_size=10, host=dbHost, user=dbUser, password=dbPass, database=dbName)
+cnxpool = mysql.pooling.MySQLConnectionPool(pool_name="mypool", pool_size=30, host=dbHost, user=dbUser, password=dbPass, database=dbName, pool_reset_session=True)
 
 # Get user data
 def getUserData(userid):
