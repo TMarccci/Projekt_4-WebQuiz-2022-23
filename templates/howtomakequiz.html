@@ -5,14 +5,39 @@
     <h1 class="text-center my-5 py-3">Az alkalmazás használata</h1>
     <div class="container">
         <div class="row">
-            <div class="col-5">
+            <div class="col-8 mx-auto my-4">
                 <h2>Bejelentkezés / regisztráció</h2>
-                <p>A kártya paklik használatához először be kell jelentkeznie a felhasználónak. Ha a felhasználónak még nincs fiókja akkor a regisztráció gombra kattintva tud létre hozni egyet. Ha a felhasználónak már van fiókja akkor a bejelentkezés gombra kattintva tud bejelentkezni.</p>
-            </div>
-            <div class="col-7">
-                <img src="{{ url_for('static', filename='img/ideiglenes.png') }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+                <p>A kártya paklik használatához először be kell jelentkeznie a felhasználónak. Ha a felhasználónak még nincs fiókja akkor a regisztráció gombra kattintva tud létre hozni egyet. Ha a felhasználónak már van fiókja akkor a bejelentkezés gombra kattintva tud bejelentkezni. Vagy az alábbi gombokra kattintva:</p>
             </div>
         </div>
+    </div>
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-md-2 mx-auto"><button onclick="location.href='/register'" type="button" class="btn btn-primary btn-lg px-4 mx-auto">Regisztráció</button></div>
+            <div class="col-md-2 mx-auto"><button onclick="location.href='/login'" type="button" class="btn btn-primary btn-lg px-4 mx-auto">Bejelentkezés</button></div>
+        </div> 
+    </div>
+
+    <div class="continer my-4">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <hr>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-8 mx-auto">
+                <h2>Paklik keresése</h2>
+                <p>Ahhoz hogy a Paklik között tudjuk keresni le kell görgetnünk az oldal aljéra és a láblécen található "Kereső" gombra (Vagy az alábbi gombra) kell kattintanunk. Ezután megjelenik elöttünk a kereső oldal. Ha egy pakli nevére rá akarunk keresni akkor egyszerűen beírjük a keresendő nevet a kereső mezőbe, és ezután rákattintunk a "Keresés" gombra. Ezután me jellennek a keresett paklik. Ha a paklik kategóriáját akarjuk megadni akkor jobb oldalon az adott kategóriára kattintva tehetjük meg ezt. Ezután már csak rá kell kattintanunk az általunk kiválasztott pakilra és már használhatja is a pakilt.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-md-2 mx-auto"><button onclick="location.href='/search'" type="button" class="btn btn-primary btn-lg px-4 mx-auto">Keresés</button></div>
+        </div> 
     </div>
 
 </div>
