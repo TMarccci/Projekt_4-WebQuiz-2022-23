@@ -18,7 +18,7 @@ dbUser = os.getenv('dbUser')
 dbPass = os.getenv('dbPass')
 dbName = os.getenv('dbName')
 
-cnxpool = mysql.pooling.MySQLConnectionPool(pool_name="mypool", pool_size=30, host=dbHost, user=dbUser, password=dbPass, database=dbName, pool_reset_session=True)
+cnxpool = mysql.pooling.MySQLConnectionPool(pool_name="mypool", pool_size=30, host=dbHost, user=dbUser, password=dbPass, database=dbName)
 
 # Get user data
 def getUserData(userid):
