@@ -1,7 +1,7 @@
 <p align=center>
   <img src="https://github.com/TMarccci/Projekt_4-WebQuiz-2022-23/blob/main/static/img/Logo.png?raw=true" width=150>
   <h1 align=center><b>Projekt 4 WebQuiz 2022-23</b></h1>
-  <span align=center><b>Ez egy olyan webplatform ahol szókártyákat hozhatsz létre és tanulhatsz velük.</b></span>
+  <span align=center><b style="display: block;">Ez egy olyan webplatform ahol szókártyákat hozhatsz létre és tanulhatsz velük.</b></span>
 </p>
 
 ## Setup Process
